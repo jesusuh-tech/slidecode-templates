@@ -1,0 +1,14 @@
+[
+  {
+    "id": "elegant-creme",
+    "name": "Elegant Creme",
+    "file": "templates/elegant-creme.sctemplate",
+    "version": "1.0.0"
+  },
+  {
+    "id": "slidecode-theme",
+    "name": "SLIDECODE THEME",
+    "file": "templates/slidecode-theme.sctemplate",
+    "version": "1.0.0"
+  }
+]
