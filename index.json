@@ -21,5 +21,12 @@
     "file": "templates/claude-code.sctemplate",
     "version": "1.0.0",
     "author": "Jesus Hurtado"
+  },
+  {
+    "id": "cromatica-el-color-y-la-alegria",
+    "name": "CROMÁTICA — el color y la alegría",
+    "file": "templates/cromatica-el-color-y-la-alegria.sctemplate",
+    "version": "1.0.0",
+    "author": "Jesus Hurtado"
   }
 ]
