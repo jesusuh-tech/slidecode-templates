@@ -3,12 +3,16 @@
     "id": "elegant-creme",
     "name": "Elegant Creme",
     "file": "templates/elegant-creme.sctemplate",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "author": "slidecode",
+    "description": "Papel cálido, serifa editorial y mucho aire. Para propuestas que se leen despacio."
   },
   {
     "id": "slidecode-theme",
     "name": "SLIDECODE THEME",
     "file": "templates/slidecode-theme.sctemplate",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "author": "slidecode",
+    "description": "El tema de la casa: mono-noir, ámbar y una retícula que se nota poco."
   }
 ]
