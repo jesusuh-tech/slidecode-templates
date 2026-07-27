@@ -1,0 +1,2268 @@
+{
+  "sctemplate": "0.1",
+  "meta": {
+    "id": "claude-code",
+    "name": "Claude Code"
+  },
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "theme": {
+    "colors": {
+      "canvas": "#0D0B0A",
+      "ink": "#938C84",
+      "muted": "#D97757",
+      "accent": "#F4F1EA",
+      "hairline": "#CFC8B9",
+      "tone-1": "#6B655E",
+      "tone-2": "#E5E0D5"
+    },
+    "fonts": {
+      "display": "Didot, 'Playfair Display', Georgia, serif",
+      "body": "Didot, 'Playfair Display', Georgia, serif",
+      "mono": "'JetBrains Mono', Menlo, ui-monospace, monospace"
+    },
+    "textStyles": {
+      "display": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 168,
+        "fontWeight": 400,
+        "lineHeight": 0.9,
+        "letterSpacing": -7,
+        "color": "$colors.accent"
+      },
+      "h1": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 88,
+        "fontWeight": 400,
+        "lineHeight": 1.02,
+        "letterSpacing": -3,
+        "color": "$colors.accent"
+      },
+      "body": {
+        "fontFamily": "'Avenir Next', Avenir, 'Optima', sans-serif",
+        "fontSize": 30,
+        "fontWeight": 400,
+        "lineHeight": 1.55,
+        "color": "$colors.ink"
+      },
+      "code": {
+        "fontFamily": "$fonts.mono",
+        "fontSize": 22,
+        "fontWeight": 400,
+        "lineHeight": 1.7,
+        "color": "$colors.ink"
+      },
+      "caption": {
+        "fontFamily": "$fonts.mono",
+        "fontSize": 18,
+        "fontWeight": 500,
+        "letterSpacing": 5,
+        "color": "$colors.muted",
+        "textTransform": "uppercase"
+      }
+    }
+  },
+  "layouts": [
+    {
+      "id": "cover",
+      "name": "Portada",
+      "slide": {
+        "id": "cover",
+        "name": "Portada",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "cover-hero3d",
+                "name": "Hero 3D",
+                "frame": {
+                  "x": 1040,
+                  "y": 70,
+                  "w": 920,
+                  "h": 920
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst COOL='#4A6CFF';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});\nrenderer.setPixelRatio(Math.min(devicePixelRatio||1,2));\nrenderer.setSize(innerWidth,innerHeight);\ndocument.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\nconst camera=new THREE.PerspectiveCamera(36,innerWidth/innerHeight,0.1,100);\ncamera.position.set(0,0.3,7.2);\nconst group=new THREE.Group();scene.add(group);\nconst core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.85,0),new THREE.MeshStandardMaterial({color:0x1b1613,metalness:0.95,roughness:0.24,flatShading:true}));\ngroup.add(core);\nconst wire=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.45,1)),new THREE.LineBasicMaterial({color:new THREE.Color(ACC),transparent:true,opacity:0.2}));\ngroup.add(wire);\nconst N=210,pos=new Float32Array(N*3);\nfor(let i=0;i<N;i++){const a=i*2.39996,r=2.95+(Math.sin(i*12.9)*0.5+0.5)*1.75;pos[i*3]=Math.cos(a)*r;pos[i*3+1]=Math.cos(i*7.7)*2.05;pos[i*3+2]=Math.sin(a)*r;}\nconst dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.BufferAttribute(pos,3));\nconst dust=new THREE.Points(dg,new THREE.PointsMaterial({color:new THREE.Color(ACC),size:0.05,transparent:true,opacity:0.5}));\ngroup.add(dust);\nconst key=new THREE.PointLight(new THREE.Color(ACC),300);key.position.set(4,3,4);scene.add(key);\nconst rim=new THREE.PointLight(new THREE.Color(COOL),140);rim.position.set(-5,-2,2.5);scene.add(rim);\nconst top=new THREE.PointLight(0xF4F1EA,70);top.position.set(0,6,-3);scene.add(top);\nscene.add(new THREE.AmbientLight(0x1a1512,2.2));\naddEventListener('resize',function(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});\nlet px=0,py=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nlet start=null;\nfunction frame(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const k=SKIP?1:expo(Math.min(t/1500,1));\n  px+=(tx-px)*0.045;py+=(ty-py)*0.045;\n  group.scale.setScalar(0.55+0.45*k);\n  group.position.y=(1-k)*-1.4+Math.sin(t/1800)*0.14;\n  group.rotation.y=t/4400+px*0.55;\n  group.rotation.x=Math.sin(t/5400)*0.26+py*0.4;\n  wire.rotation.y=-t/6200;wire.rotation.z=t/8200;\n  dust.rotation.y=t/9200;\n  key.intensity=300+Math.sin(t/980)*70;\n  dust.material.opacity=(0.2+0.3*(Math.sin(t/1600)*0.5+0.5))*k;\n  wire.material.opacity=0.2*k;\n  renderer.render(scene,camera);\n  requestAnimationFrame(frame);\n}\nslidecode.onReveal(function(){requestAnimationFrame(frame);});\n",
+                "libs": [
+                  "three"
+                ]
+              },
+              {
+                "id": "cover-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 120,
+                  "y": 300,
+                  "w": 700,
+                  "h": 30
+                },
+                "type": "text",
+                "text": "Anthropic · 2026",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "hero-word",
+                "name": "Wordmark",
+                "frame": {
+                  "x": 112,
+                  "y": 350,
+                  "w": 900,
+                  "h": 400
+                },
+                "type": "text",
+                "text": "Claude\nCode",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 190,
+                  "lineHeight": 0.86,
+                  "letterSpacing": -9
+                }
+              },
+              {
+                "id": "cover-rule",
+                "name": "Filete",
+                "frame": {
+                  "x": 120,
+                  "y": 790,
+                  "w": 420,
+                  "h": 2
+                },
+                "opacity": 0.32,
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "cover-sub",
+                "name": "Subtítulo",
+                "frame": {
+                  "x": 120,
+                  "y": 830,
+                  "w": 790,
+                  "h": 140
+                },
+                "type": "text",
+                "text": "El agente de programación que vive en tu terminal, tu editor y tu navegador.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 32,
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "cover-foot",
+                "name": "Pie",
+                "frame": {
+                  "x": 1480,
+                  "y": 1000,
+                  "w": 320,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "12 láminas",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "color": "$colors.ink",
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "cover-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "cover-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.1,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 22
+              },
+              {
+                "nodeId": "hero-word",
+                "effect": "slideIn",
+                "duration": 1,
+                "delay": 0.24,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 96
+              },
+              {
+                "nodeId": "cover-rule",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0.8,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 340
+              },
+              {
+                "nodeId": "cover-sub",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.96,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "cover-foot",
+                "effect": "fadeIn",
+                "duration": 0.7,
+                "delay": 1.25,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ],
+        "notes": "ADN DE MARCA — Editorial oscuro y cálido, anclado abajo-izquierda. UN solo acento (#D97757, el terracota de Anthropic) y aparece una vez por lámina. Display serif de alto contraste (Didot) contra cuerpo sans y mono: jerarquía real de 5×. Numerales y formas fantasma al 6-8% dan profundidad sin ruido. Dos láminas invierten la paleta (06 y 11) para marcar capítulo. Hero 3D en portada y cierre como bookend; giros lentos (períodos 4-8s). DO: aire, asimetría, hairlines, mono para etiquetas. DON'T: centrar, degradados, segundo color, iconos redondos sobre cada título."
+      }
+    },
+    {
+      "id": "que",
+      "name": "01 Qué es",
+      "slide": {
+        "id": "que",
+        "name": "01 Qué es",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.9
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "que-num",
+                "name": "Numeral fantasma",
+                "frame": {
+                  "x": 1240,
+                  "y": 260,
+                  "w": 600,
+                  "h": 560
+                },
+                "opacity": 0.07,
+                "type": "text",
+                "text": "01",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 340,
+                  "color": "$colors.accent",
+                  "align": "right"
+                }
+              },
+              {
+                "id": "hero-word",
+                "name": "Wordmark",
+                "frame": {
+                  "x": 120,
+                  "y": 110,
+                  "w": 440,
+                  "h": 120
+                },
+                "type": "text",
+                "text": "Claude\nCode",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 44,
+                  "lineHeight": 1.04,
+                  "letterSpacing": -1
+                }
+              },
+              {
+                "id": "que-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 296,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "01 — Qué es",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "que-rule",
+                "name": "Filete",
+                "frame": {
+                  "x": 122,
+                  "y": 340,
+                  "w": 96,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "que-1",
+                "name": "Línea 1",
+                "frame": {
+                  "x": 116,
+                  "y": 396,
+                  "w": 1200,
+                  "h": 170
+                },
+                "type": "text",
+                "text": "No autocompleta.",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 132,
+                  "letterSpacing": -6
+                }
+              },
+              {
+                "id": "que-2",
+                "name": "Línea 2",
+                "frame": {
+                  "x": 116,
+                  "y": 528,
+                  "w": 1200,
+                  "h": 170
+                },
+                "type": "text",
+                "text": "Ejecuta.",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 132,
+                  "letterSpacing": -6,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "que-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 122,
+                  "y": 748,
+                  "w": 900,
+                  "h": 200
+                },
+                "type": "text",
+                "text": "Lee tu repositorio, planifica, edita archivos, corre comandos, lee la salida y corrige. Tú describes el objetivo; él recorre el bucle hasta el final.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 32
+                }
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "que-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "que-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.35,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "que-rule",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.42,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 80
+              },
+              {
+                "nodeId": "que-1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.52,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              },
+              {
+                "nodeId": "que-2",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.72,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              },
+              {
+                "nodeId": "que-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 1.05,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "que-num",
+                "effect": "fadeIn",
+                "duration": 1.2,
+                "delay": 0.6,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "mark",
+                "effect": "fadeIn",
+                "duration": 0.7,
+                "delay": 1.3,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "superficies",
+      "name": "02 Dónde vive",
+      "slide": {
+        "id": "superficies",
+        "name": "02 Dónde vive",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "sup-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 150,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "02 — Dónde vive",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "sup-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 200,
+                  "w": 1100,
+                  "h": 210
+                },
+                "type": "text",
+                "text": "Un agente,\ncuatro puertas.",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "sup-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 1300,
+                  "y": 212,
+                  "w": 500,
+                  "h": 250
+                },
+                "type": "text",
+                "text": "La misma sesión y el mismo contexto: terminal, app de escritorio (Mac y Windows), claude.ai/code y extensiones para VS Code y JetBrains.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 26
+                }
+              },
+              {
+                "id": "sup-block",
+                "name": "Superficies vivas",
+                "frame": {
+                  "x": 120,
+                  "y": 470,
+                  "w": 1680,
+                  "h": 420
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SURF=T['tone-1']||'#171311';\nconst HAIR=T.hairline||'#2A2521';\nconst LABELS=['TERMINAL','ESCRITORIO','WEB','IDE'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nfunction rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst DWELL=2300,INTRO=900;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const active=Math.floor(run/DWELL)%4;\n  const phase=(run%DWELL)/DWELL;\n  ctx.clearRect(0,0,W,H);\n  const gap=30,pw=(W-gap*3)/4,ph=H-64;\n  for(let i=0;i<4;i++){\n    const k=SKIP?1:expo(Math.min(Math.max((t-i*140)/720,0),1));\n    const x=i*(pw+gap),y=(1-k)*44,on=i===active;\n    ctx.globalAlpha=k;\n    ctx.fillStyle=SURF;rr(x,y,pw,ph,10);ctx.fill();\n    if(on){ctx.globalAlpha=k*0.09;ctx.fillStyle=ACC;rr(x-7,y-7,pw+14,ph+14,15);ctx.fill();ctx.globalAlpha=k;}\n    ctx.strokeStyle=on?ca(A,0.85):HAIR;ctx.lineWidth=on?2:1;rr(x,y,pw,ph,10);ctx.stroke();\n    ctx.fillStyle=ca(I,0.08);ctx.fillRect(x+1,y+1,pw-2,28);\n    for(let d=0;d<3;d++){ctx.beginPath();ctx.arc(x+20+d*15,y+15,3.2,0,6.2832);ctx.fillStyle=ca(I,0.26);ctx.fill();}\n    const rows=7,lh=24;\n    for(let r=0;r<rows;r++){\n      const ry=y+52+r*lh;\n      if(ry>y+ph-34)break;\n      const wf=0.28+rnd(i*9+r*3)*0.54;\n      const lit=on&&r<=Math.floor(phase*rows*1.55);\n      ctx.fillStyle=lit?ca(A,0.72):ca(I,0.13);\n      ctx.fillRect(x+20,ry,(pw-40)*wf,6);\n    }\n    if(on){\n      const rrw=Math.min(rows-1,Math.floor(phase*rows*1.55));\n      const ry=y+52+rrw*lh;\n      const wf=0.28+rnd(i*9+rrw*3)*0.54;\n      if(Math.floor(run/400)%2===0){ctx.fillStyle=INK;ctx.fillRect(x+20+(pw-40)*wf+6,ry-4,9,13);}\n    }\n    ctx.fillStyle=on?INK:ca(I,0.34);\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='left';\n    ctx.fillText(LABELS[i],x+2,H-14);\n    ctx.globalAlpha=1;\n  }\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "sup-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "sup-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "sup-h1",
+                "effect": "slideIn",
+                "duration": 0.85,
+                "delay": 0.16,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 54
+              },
+              {
+                "nodeId": "sup-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.44,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bucle",
+      "name": "03 El bucle",
+      "slide": {
+        "id": "bucle",
+        "name": "03 El bucle",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "slide",
+          "duration": 0.6,
+          "direction": "up"
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "orb",
+                "name": "Halo",
+                "frame": {
+                  "x": 1030,
+                  "y": 170,
+                  "w": 760,
+                  "h": 760
+                },
+                "opacity": 0.07,
+                "type": "shape",
+                "shape": "ellipse",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "buc-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 190,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "03 — El bucle",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "buc-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 246,
+                  "w": 880,
+                  "h": 380
+                },
+                "type": "text",
+                "text": "Explorar.\nPlanear.\nEditar.\nVerificar.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 86,
+                  "lineHeight": 1.06
+                }
+              },
+              {
+                "id": "buc-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 122,
+                  "y": 680,
+                  "w": 780,
+                  "h": 220
+                },
+                "type": "text",
+                "text": "El valor no está en una respuesta suelta: está en la vuelta completa. Cada iteración usa herramientas reales y evidencia real.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "buc-block",
+                "name": "Órbita del agente",
+                "frame": {
+                  "x": 1060,
+                  "y": 200,
+                  "w": 700,
+                  "h": 700
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst MUT='rgba(244,241,234,0.34)';\nconst LABELS=['EXPLORAR','PLANEAR','EDITAR','VERIFICAR'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst PERIOD=3600,INTRO=1000;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const intro=SKIP?1:Math.min(t/INTRO,1);\n  const k=expo(intro);\n  const cx=W/2,cy=H/2+6,R=Math.min(W,H)*0.32;\n  ctx.clearRect(0,0,W,H);\n  ctx.strokeStyle='rgba(244,241,234,0.14)';ctx.lineWidth=1.5;\n  ctx.beginPath();ctx.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+Math.PI*2*k);ctx.stroke();\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const ang=-Math.PI/2+(run%PERIOD)/PERIOD*Math.PI*2;\n  const passes=Math.floor(run/PERIOD)*LABELS.length+Math.floor((run%PERIOD)/PERIOD*LABELS.length);\n  for(let i=0;i<LABELS.length;i++){\n    const a=-Math.PI/2+i*(Math.PI*2/LABELS.length);\n    const sx=cx+Math.cos(a)*R,sy=cy+Math.sin(a)*R;\n    const pop=SKIP?1:expo(Math.min(Math.max((t-460-i*130)/460,0),1));\n    const d=Math.abs(((ang-a)%(Math.PI*2)+Math.PI*3)%(Math.PI*2)-Math.PI);\n    const heat=intro>=1?Math.max(0,1-d/0.9):0;\n    ctx.globalAlpha=pop*(0.28+0.72*heat);ctx.fillStyle=ACC;\n    ctx.beginPath();ctx.arc(sx,sy,4.5+3.5*heat,0,Math.PI*2);ctx.fill();\n    if(heat>0.3){ctx.globalAlpha=pop*heat*0.30;ctx.beginPath();ctx.arc(sx,sy,12+9*heat,0,Math.PI*2);ctx.fill();}\n    ctx.globalAlpha=pop;ctx.fillStyle=heat>0.5?INK:MUT;\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='center';\n    const off=26+9*heat;\n    ctx.fillText(LABELS[i],sx+Math.cos(a)*off*1.5,sy+Math.sin(a)*off+5);\n    ctx.globalAlpha=1;\n  }\n  if(intro>=1){\n    for(let q=0;q<11;q++){\n      const qa=ang-q*0.042;\n      ctx.fillStyle=ACC;ctx.globalAlpha=(1-q/11)*0.9;\n      ctx.beginPath();ctx.arc(cx+Math.cos(qa)*R,cy+Math.sin(qa)*R,4.2-q*0.28,0,Math.PI*2);ctx.fill();\n    }\n    ctx.globalAlpha=1;\n  }\n  ctx.textAlign='center';ctx.globalAlpha=k;\n  ctx.fillStyle=INK;ctx.font='italic 400 58px Georgia, serif';\n  ctx.fillText(String(passes),cx,cy+14);\n  ctx.fillStyle=MUT;ctx.font='600 11px ui-monospace, Menlo, monospace';\n  ctx.fillText('ITERACIONES',cx,cy+40);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "buc-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "orb",
+                "effect": "fadeIn",
+                "duration": 1.2,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "buc-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.08,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "buc-h1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.2,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 62
+              },
+              {
+                "nodeId": "buc-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.6,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "herramientas",
+      "name": "04 Herramientas",
+      "slide": {
+        "id": "herramientas",
+        "name": "04 Herramientas",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.85
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "orb",
+                "name": "Halo",
+                "frame": {
+                  "x": 1670,
+                  "y": 900,
+                  "w": 180,
+                  "h": 180
+                },
+                "opacity": 0.16,
+                "type": "shape",
+                "shape": "ellipse",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "her-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 150,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "04 — Herramientas",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "her-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 200,
+                  "w": 1080,
+                  "h": 210
+                },
+                "type": "text",
+                "text": "Read. Edit. Bash.\nGrep. Glob. Web.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 84
+                }
+              },
+              {
+                "id": "her-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 1250,
+                  "y": 208,
+                  "w": 550,
+                  "h": 250
+                },
+                "type": "text",
+                "text": "Herramientas de verdad, no descripciones: leer archivos, editar con precisión quirúrgica, ejecutar comandos y buscar en el repo y en la web.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 26
+                }
+              },
+              {
+                "id": "her-block",
+                "name": "Actividad de herramientas",
+                "frame": {
+                  "x": 120,
+                  "y": 470,
+                  "w": 1680,
+                  "h": 420
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst TOOLS=['read','edit','bash','grep','glob','web'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst COLS=30,TICK=250,INTRO=800;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const n=Math.floor(run/TICK);\n  ctx.clearRect(0,0,W,H);\n  const padL=130,padT=54,gap=5;\n  const cw=(W-padL-gap*(COLS-1))/COLS;\n  const ch=(H-padT-26-gap*(TOOLS.length-1))/TOOLS.length;\n  for(let r=0;r<TOOLS.length;r++){\n    const k=SKIP?1:expo(Math.min(Math.max((t-r*95)/640,0),1));\n    const y=padT+r*(ch+gap);\n    ctx.globalAlpha=k;\n    for(let col=0;col<COLS;col++){ctx.fillStyle=ca(I,0.055);ctx.fillRect(padL+col*(cw+gap),y,cw,ch);}\n    ctx.fillStyle=ca(I,0.40);\n    ctx.font='600 14px ui-monospace, Menlo, monospace';ctx.textAlign='right';\n    ctx.fillText(TOOLS[r],padL-20,y+ch/2+5);\n    ctx.globalAlpha=1;\n  }\n  for(let i=Math.max(0,n-COLS+1);i<=n;i++){\n    const r=Math.floor(rnd(i*13+1)*TOOLS.length);\n    const col=i%COLS;\n    const age=(n-i)/COLS;\n    const a=Math.max(0,1-age);\n    const y=padT+r*(ch+gap),x=padL+col*(cw+gap);\n    ctx.fillStyle=ca(A,0.14+0.76*a*a);\n    ctx.fillRect(x,y,cw,ch);\n    if(a>0.95){ctx.globalAlpha=0.26;ctx.fillStyle=ACC;ctx.fillRect(x-5,y-5,cw+10,ch+10);ctx.globalAlpha=1;}\n  }\n  const ik=SKIP?1:expo(Math.min(t/640,1));\n  ctx.globalAlpha=ik;ctx.textAlign='left';\n  ctx.font='600 14px ui-monospace, Menlo, monospace';\n  ctx.fillStyle=ca(I,0.40);ctx.fillText('LLAMADAS',padL,28);\n  ctx.fillStyle=INK;ctx.fillText(String(n).length>3?String(n):('000'+n).slice(-4),padL+108,28);\n  ctx.fillStyle=ACC;ctx.fillText('> '+TOOLS[Math.floor(rnd(n*13+1)*TOOLS.length)],padL+220,28);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "her-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "her-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.3,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "her-h1",
+                "effect": "slideIn",
+                "duration": 0.85,
+                "delay": 0.4,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 52
+              },
+              {
+                "nodeId": "her-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.68,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "contexto",
+      "name": "05 Contexto",
+      "slide": {
+        "id": "contexto",
+        "name": "05 Contexto",
+        "background": {
+          "type": "solid",
+          "color": "$colors.accent"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.7
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "rail",
+                "name": "Riel",
+                "frame": {
+                  "x": 120,
+                  "y": 200,
+                  "w": 5,
+                  "h": 700
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "ctx-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 172,
+                  "y": 200,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "05 — Contexto",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "ctx-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 168,
+                  "y": 254,
+                  "w": 700,
+                  "h": 300
+                },
+                "type": "text",
+                "text": "Memoria\nque persiste.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 84,
+                  "color": "$colors.canvas"
+                }
+              },
+              {
+                "id": "ctx-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 172,
+                  "y": 570,
+                  "w": 620,
+                  "h": 260
+                },
+                "type": "text",
+                "text": "Un archivo CLAUDE.md guarda las reglas del proyecto: comandos, convenciones, zonas prohibidas. Se cargan solas en cada sesión, así no repites lo mismo cada mañana.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 28,
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "ctx-file-bg",
+                "name": "Archivo",
+                "frame": {
+                  "x": 900,
+                  "y": 240,
+                  "w": 880,
+                  "h": 520
+                },
+                "shadow": {
+                  "color": "#0D0B0A18",
+                  "x": 0,
+                  "y": 18,
+                  "blur": 44
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.tone-2"
+                },
+                "stroke": {
+                  "color": "$colors.hairline",
+                  "width": 1
+                },
+                "cornerRadius": 8
+              },
+              {
+                "id": "ctx-file-title",
+                "name": "Nombre archivo",
+                "frame": {
+                  "x": 944,
+                  "y": 286,
+                  "w": 700,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "CLAUDE.md",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "ctx-file-code",
+                "name": "Reglas",
+                "frame": {
+                  "x": 944,
+                  "y": 350,
+                  "w": 800,
+                  "h": 360
+                },
+                "type": "text",
+                "text": "# Reglas del proyecto\n\nEjecuta `pnpm test` antes de commitear.\nNo toques nada dentro de `legacy/`.\nLos mensajes de commit van en español.\nPrefiere funciones puras en `src/core`.",
+                "styleRef": "$textStyles.code",
+                "style": {
+                  "fontSize": 21,
+                  "lineHeight": 1.85,
+                  "color": "$colors.canvas"
+                }
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.55,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.canvas"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "ctx-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "rail",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 140
+              },
+              {
+                "nodeId": "ctx-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.14,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "ctx-h1",
+                "effect": "slideIn",
+                "duration": 0.85,
+                "delay": 0.24,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 52
+              },
+              {
+                "nodeId": "ctx-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.56,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "ctx-file-bg",
+                "effect": "scaleIn",
+                "duration": 0.8,
+                "delay": 0.42,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "ctx-file-title",
+                "effect": "fadeIn",
+                "duration": 0.6,
+                "delay": 0.7,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "ctx-file-code",
+                "effect": "fadeIn",
+                "duration": 0.9,
+                "delay": 0.84,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "skills",
+      "name": "06 Skills",
+      "slide": {
+        "id": "skills",
+        "name": "06 Skills",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.85
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "rail",
+                "name": "Riel",
+                "frame": {
+                  "x": 120,
+                  "y": 252,
+                  "w": 620,
+                  "h": 5
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "skl-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 190,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "06 — Skills",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "skl-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 310,
+                  "w": 860,
+                  "h": 320
+                },
+                "type": "text",
+                "text": "Instrucciones que\nse cargan solo\ncuando hacen falta.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 78
+                }
+              },
+              {
+                "id": "skl-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 122,
+                  "y": 672,
+                  "w": 760,
+                  "h": 240
+                },
+                "type": "text",
+                "text": "Una skill es una carpeta con un SKILL.md. Su nombre y descripción viven siempre en contexto; el cuerpo se abre cuando la tarea lo pide. Divulgación progresiva: contexto barato, experiencia profunda.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 28
+                }
+              },
+              {
+                "id": "skl-block",
+                "name": "Divulgación progresiva",
+                "frame": {
+                  "x": 1000,
+                  "y": 240,
+                  "w": 800,
+                  "h": 620
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SURF=T['tone-1']||'#171311';\nconst HAIR=T.hairline||'#2A2521';\nconst L=[['NOMBRE + DESCRIPCIÓN','siempre en contexto',1],['SKILL.md','se lee cuando aplica',4],['reference/ · scripts/','se abre si hace falta',7]];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nfunction rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst STEP=1600,HOLD=2700,CLOSE=1000,TOTAL=STEP*3+HOLD+CLOSE;\nconst HEAD=66,LH=18,LG=10;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:600));\n  const p=run%TOTAL;\n  ctx.clearRect(0,0,W,H);\n  let y=0;\n  for(let i=0;i<3;i++){\n    let o;\n    if(p<STEP*3){o=Math.min(Math.max((p-i*STEP)/(STEP*0.8),0),1);}\n    else if(p<STEP*3+HOLD){o=1;}\n    else {const cp=(p-STEP*3-HOLD)/CLOSE;o=1-Math.min(Math.max(cp*1.4-(2-i)*0.14,0),1);}\n    o=expo(o);\n    const inner=L[i][2]*(LH+LG)+16;\n    const h=HEAD+o*inner;\n    ctx.fillStyle=SURF;rr(0,y,W,h,8);ctx.fill();\n    if(o>0.04){ctx.globalAlpha=o*0.06;ctx.fillStyle=ACC;rr(-5,y-5,W+10,h+10,12);ctx.fill();ctx.globalAlpha=1;}\n    ctx.strokeStyle=o>0.04?ca(A,0.18+0.52*o):HAIR;ctx.lineWidth=1.4;\n    rr(0,y,W,h,8);ctx.stroke();\n    ctx.fillStyle=ca(A,0.30+0.70*o);\n    ctx.fillRect(0,y+20,4,HEAD-40);\n    ctx.textAlign='left';\n    ctx.font='600 15px ui-monospace, Menlo, monospace';\n    ctx.fillStyle=o>0.5?INK:ca(I,0.52);\n    ctx.fillText(L[i][0],24,y+31);\n    ctx.font='400 13px ui-monospace, Menlo, monospace';\n    ctx.fillStyle=ca(I,0.36);\n    ctx.fillText(L[i][1],24,y+52);\n    for(let r=0;r<L[i][2];r++){\n      const lk=Math.min(Math.max(o*1.6-r*0.12,0),1);\n      if(lk<=0)continue;\n      const wf=0.30+rnd(i*7+r*3)*0.58;\n      ctx.fillStyle=ca(I,0.09+0.15*lk);\n      ctx.fillRect(24,y+HEAD+r*(LH+LG),(W-48)*wf*lk,6);\n    }\n    y+=h+14;\n  }\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "skl-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "skl-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.32,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "skl-h1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.42,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 56
+              },
+              {
+                "nodeId": "skl-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.76,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "subagentes",
+      "name": "07 Paralelismo",
+      "slide": {
+        "id": "subagentes",
+        "name": "07 Paralelismo",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "slide",
+          "duration": 0.6,
+          "direction": "left"
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "sub-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 190,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "07 — Paralelismo",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "sub-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 258,
+                  "w": 740,
+                  "h": 300
+                },
+                "type": "text",
+                "text": "Subagentes\nen paralelo.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 92
+                }
+              },
+              {
+                "id": "sub-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 122,
+                  "y": 600,
+                  "w": 700,
+                  "h": 280
+                },
+                "type": "text",
+                "text": "El agente principal reparte el trabajo independiente entre subagentes, cada uno con su propio contexto. Vuelven con la conclusión, no con el volcado de veinte archivos.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 28
+                }
+              },
+              {
+                "id": "sub-block",
+                "name": "Fan-out de subagentes",
+                "frame": {
+                  "x": 880,
+                  "y": 170,
+                  "w": 960,
+                  "h": 740
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst N=5,OUT=1000,WORK=2200,BACK=1300,ABS=1100,CY=OUT+WORK+BACK+ABS;\nlet px=0,tx=0;\nslidecode.onPointer(function(p){tx=(p&&p.inside)?(p.y-0.5):0;});\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:500));\n  const cyc=Math.floor(run/CY),p=run%CY;\n  px+=(tx-px)*0.05;\n  ctx.clearRect(0,0,W,H);\n  const cx=W*0.15,cy=H*0.5+px*26,R=W*0.66;\n  for(let i=0;i<N;i++){\n    const a=-0.55+(i/(N-1))*1.10;\n    const sx=cx+Math.cos(a)*R,sy=cy+Math.sin(a)*R*0.56;\n    const g=Math.min(Math.max((p-i*130)/OUT,0),1);\n    const k=expo(g);\n    ctx.strokeStyle=ca(I,0.15);ctx.lineWidth=1.2;\n    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+(sx-cx)*k,cy+(sy-cy)*k);ctx.stroke();\n    if(k<=0.03)continue;\n    const working=p>OUT&&p<OUT+WORK;\n    const pulse=(Math.sin((run+i*420)/280)+1)/2;\n    ctx.fillStyle=ACC;ctx.globalAlpha=k*(working?0.72+0.28*pulse:0.5);\n    ctx.beginPath();ctx.arc(sx,sy,5.5,0,6.2832);ctx.fill();\n    if(working){ctx.globalAlpha=k*0.16*pulse;ctx.beginPath();ctx.arc(sx,sy,17+9*pulse,0,6.2832);ctx.fill();}\n    ctx.globalAlpha=1;\n    if(p>OUT){\n      const wp=Math.min(Math.max((p-OUT)/WORK,0),1);\n      for(let b=0;b<3;b++){\n        const bk=Math.min(Math.max(wp*1.5-b*0.26,0),1);\n        if(bk<=0)continue;\n        ctx.fillStyle=ca(I,0.12+0.11*bk);\n        ctx.fillRect(sx+16,sy-10+b*8,50*bk,4);\n      }\n    }\n    if(p>OUT+WORK){\n      const rp=Math.min((p-OUT-WORK)/BACK,1);\n      const e=1-Math.pow(1-rp,3);\n      const ax=sx+(cx-sx)*e,ay=sy+(cy-sy)*e;\n      ctx.fillStyle=ACC;\n      ctx.beginPath();ctx.arc(ax,ay,3.8,0,6.2832);ctx.fill();\n      ctx.globalAlpha=0.22;ctx.beginPath();ctx.arc(ax,ay,10,0,6.2832);ctx.fill();ctx.globalAlpha=1;\n    }\n    ctx.font='600 11px ui-monospace, Menlo, monospace';ctx.textAlign='left';\n    ctx.fillStyle=ca(I,0.32*k);\n    ctx.fillText('agente '+(i+1),sx+16,sy+28);\n  }\n  const absorbing=p>OUT+WORK+BACK;\n  const cp=absorbing?(p-OUT-WORK-BACK)/ABS:0;\n  ctx.strokeStyle=absorbing?'rgba(217,119,87,'+(0.62*(1-cp)).toFixed(3)+')':'rgba(217,119,87,0.26)';\n  ctx.lineWidth=2;\n  ctx.beginPath();ctx.arc(cx,cy,26+(absorbing?cp*38:0),0,6.2832);ctx.stroke();\n  ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(cx,cy,11,0,6.2832);ctx.fill();\n  const back=p>OUT+WORK?Math.min(N,Math.floor((p-OUT-WORK)/(BACK/N))+1):0;\n  const found=cyc*N+back;\n  ctx.textAlign='center';\n  ctx.fillStyle=INK;ctx.font='italic 400 46px Georgia, serif';\n  ctx.fillText(String(found),cx,cy+96);\n  ctx.fillStyle=ca(I,0.36);ctx.font='600 10px ui-monospace, Menlo, monospace';\n  ctx.fillText('HALLAZGOS',cx,cy+120);\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "sub-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "sub-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.06,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "sub-h1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.18,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              },
+              {
+                "nodeId": "sub-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.52,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mcp",
+      "name": "08 Extensión",
+      "slide": {
+        "id": "mcp",
+        "name": "08 Extensión",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "mcp-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 190,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "08 — Extensión",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "mcp-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 258,
+                  "w": 700,
+                  "h": 320
+                },
+                "type": "text",
+                "text": "MCP y hooks:\nel resto de\ntu stack.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 80
+                }
+              },
+              {
+                "id": "mcp-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 122,
+                  "y": 630,
+                  "w": 660,
+                  "h": 280
+                },
+                "type": "text",
+                "text": "MCP conecta herramientas externas —repos, bases de datos, diseño, tickets— con un protocolo común. Los hooks disparan tus propios comandos antes o después de cada acción del agente.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 28
+                }
+              },
+              {
+                "id": "mcp-block",
+                "name": "Hub MCP",
+                "frame": {
+                  "x": 830,
+                  "y": 150,
+                  "w": 1010,
+                  "h": 800
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst EPS=['github','postgres','figma','slack','archivos','http'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst HUB=54,PK=640,INTRO=1000;\nlet mx=0,my=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  mx+=(tx-mx)*0.05;my+=(ty-my)*0.05;\n  ctx.clearRect(0,0,W,H);\n  const cx=W*0.5+mx*22,cy=H*0.5+my*18,R=Math.min(W,H)*0.36;\n  for(let i=0;i<6;i++){\n    const a=-Math.PI/2+i*(Math.PI/3);\n    const ex=cx+Math.cos(a)*R,ey=cy+Math.sin(a)*R;\n    const k=SKIP?1:expo(Math.min(Math.max((t-i*120)/900,0),1));\n    const sx=cx+Math.cos(a)*HUB,sy=cy+Math.sin(a)*HUB;\n    ctx.strokeStyle=ca(I,0.17);ctx.lineWidth=1.2;\n    ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+(ex-sx)*k,sy+(ey-sy)*k);ctx.stroke();\n    if(k<0.9)continue;\n    ctx.fillStyle=ACC;ctx.globalAlpha=0.55;\n    ctx.beginPath();ctx.arc(ex,ey,6,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.12;\n    ctx.beginPath();ctx.arc(ex,ey,16,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n    ctx.font='600 13px ui-monospace, Menlo, monospace';\n    ctx.textAlign=Math.cos(a)>0.2?'left':(Math.cos(a)<-0.2?'right':'center');\n    const off=Math.cos(a)>0.2?20:(Math.cos(a)<-0.2?-20:0);\n    ctx.fillStyle=ca(I,0.46);\n    ctx.fillText(EPS[i],ex+off,ey+(Math.abs(Math.cos(a))<0.2?(Math.sin(a)>0?30:-20):5));\n  }\n  const n=Math.floor(run/PK);\n  for(let j=Math.max(0,n-4);j<=n;j++){\n    const at=j*PK;\n    const age=(run-at)/1000;\n    if(age<0||age>1)continue;\n    const idx=Math.floor(rnd(j*7+5)*6);\n    const a=-Math.PI/2+idx*(Math.PI/3);\n    const sx=cx+Math.cos(a)*HUB,sy=cy+Math.sin(a)*HUB;\n    const ex=cx+Math.cos(a)*R,ey=cy+Math.sin(a)*R;\n    const inbound=rnd(j*3+1)>0.5;\n    const e=1-Math.pow(1-age,2.2);\n    const f=inbound?1-e:e;\n    const x=sx+(ex-sx)*f,y=sy+(ey-sy)*f;\n    ctx.fillStyle=ACC;ctx.globalAlpha=0.95;\n    ctx.beginPath();ctx.arc(x,y,3.6,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.20;\n    ctx.beginPath();ctx.arc(x,y,10,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n  }\n  const hp=Math.max(0,1-((run%PK)/400));\n  const ik=SKIP?1:expo(Math.min(t/900,1));\n  ctx.globalAlpha=ik;\n  ctx.strokeStyle=ca(I,0.20);ctx.lineWidth=1.4;\n  ctx.beginPath();ctx.arc(cx,cy,HUB,0,6.2832);ctx.stroke();\n  ctx.strokeStyle='rgba(217,119,87,'+(0.55*hp).toFixed(3)+')';ctx.lineWidth=2;\n  ctx.beginPath();ctx.arc(cx,cy,HUB+8+hp*16,0,6.2832);ctx.stroke();\n  ctx.fillStyle='rgba(217,119,87,'+(0.10+0.10*hp).toFixed(3)+')';\n  ctx.beginPath();ctx.arc(cx,cy,HUB-4,0,6.2832);ctx.fill();\n  ctx.textAlign='center';\n  ctx.fillStyle=INK;ctx.font='600 15px ui-monospace, Menlo, monospace';\n  ctx.fillText('MCP',cx,cy+6);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "mcp-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "mcp-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "mcp-h1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.16,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 56
+              },
+              {
+                "nodeId": "mcp-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.5,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "modelos",
+      "name": "09 Esfuerzo",
+      "slide": {
+        "id": "modelos",
+        "name": "09 Esfuerzo",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "slide",
+          "duration": 0.6,
+          "direction": "up"
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "mod-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 150,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "09 — Esfuerzo",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "mod-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 118,
+                  "y": 200,
+                  "w": 900,
+                  "h": 210
+                },
+                "type": "text",
+                "text": "Cuánto pensar\nlo decides tú.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 84
+                }
+              },
+              {
+                "id": "mod-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 1180,
+                  "y": 208,
+                  "w": 620,
+                  "h": 250
+                },
+                "type": "text",
+                "text": "Opus 5 por defecto; Sonnet 5 y Haiku 4.5 cuando manda el ritmo. El nivel de esfuerzo mueve la profundidad del razonamiento —y el gasto— sin cambiar de modelo.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 26
+                }
+              },
+              {
+                "id": "mod-block",
+                "name": "Escalera de esfuerzo",
+                "frame": {
+                  "x": 120,
+                  "y": 470,
+                  "w": 1680,
+                  "h": 420
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst STOPS=[['low','respuestas rápidas'],['medium','trabajo cotidiano'],['high','el valor por defecto'],['xhigh','código y agentes'],['max','cuando la exactitud manda']];\nconst TOTAL=STOPS.length;\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nfunction target(){return slidecode.mode==='edit'?TOTAL:Math.max(0,Math.min(TOTAL,slidecode.step));}\nlet prog=target();\nslidecode.onModeChange(function(){});\nslidecode.onStep(function(){});\nlet last=null;\nfunction draw(now){\n  if(last===null)last=now;\n  const dt=Math.min(64,now-last);last=now;\n  prog+=(target()-prog)*Math.min(1,dt/240);\n  ctx.clearRect(0,0,W,H);\n  const padX=50,ty=H*0.70,maxH=ty-46;\n  const slot=(W-padX*2)/TOTAL;\n  const xs=[];for(let i=0;i<TOTAL;i++)xs.push(padX+(i+0.5)*slot);\n  const bw=slot*0.42;\n  const cur=Math.max(0,Math.min(TOTAL-1,Math.round(prog)-1));\n  for(let i=0;i<TOTAL;i++){\n    const f=expo(Math.min(Math.max(prog-i,0),1));\n    if(f<=0.005)continue;\n    const bh=(0.20+0.17*i)*maxH*f;\n    const on=i===cur&&prog>0.4;\n    ctx.fillStyle=on?ca(toRGB(ACC),0.85):'rgba(217,119,87,0.22)';\n    ctx.fillRect(xs[i]-bw/2,ty-bh,bw,bh);\n    if(on){ctx.globalAlpha=0.10;ctx.fillStyle=ACC;ctx.fillRect(xs[i]-bw/2-8,ty-bh-8,bw+16,bh+8);ctx.globalAlpha=1;}\n  }\n  ctx.strokeStyle=ca(I,0.14);ctx.lineWidth=1.5;\n  ctx.beginPath();ctx.moveTo(padX,ty);ctx.lineTo(W-padX,ty);ctx.stroke();\n  let mxp=xs[0];\n  if(prog>0.02){\n    const idx=Math.max(0,Math.min(TOTAL-1,prog-1));\n    const i0=Math.floor(idx),fr=idx-i0;\n    mxp=xs[i0]+(xs[Math.min(i0+1,TOTAL-1)]-xs[i0])*fr;\n    ctx.strokeStyle='rgba(217,119,87,0.6)';ctx.lineWidth=2;\n    ctx.beginPath();ctx.moveTo(padX,ty);ctx.lineTo(mxp,ty);ctx.stroke();\n  }\n  for(let i=0;i<TOTAL;i++){\n    const f=Math.min(Math.max(prog-i,0),1);\n    ctx.fillStyle=i===cur&&prog>0.4?ACC:ca(I,0.22+0.22*f);\n    ctx.beginPath();ctx.arc(xs[i],ty,i===cur&&prog>0.4?5:3.4,0,6.2832);ctx.fill();\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='center';\n    ctx.fillStyle=i===cur&&prog>0.4?INK:ca(I,0.26+0.24*f);\n    ctx.fillText('0'+(i+1)+'  '+STOPS[i][0].toUpperCase(),xs[i],ty+34);\n  }\n  if(prog>0.02){\n    const wob=Math.sin(now/320)*0.14+1;\n    ctx.fillStyle=ACC;\n    ctx.beginPath();ctx.arc(mxp,ty,7.5*wob,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.22;\n    ctx.beginPath();ctx.arc(mxp,ty,15*wob,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n  }\n  ctx.textAlign='left';\n  ctx.font='600 13px ui-monospace, Menlo, monospace';\n  ctx.fillStyle=ca(I,0.36);\n  ctx.fillText('NIVEL DE ESFUERZO',padX,26);\n  if(prog>0.3){\n    ctx.fillStyle=ACC;\n    ctx.fillText(STOPS[cur][0].toUpperCase()+'  ·  '+STOPS[cur][1],padX+220,26);\n  } else {\n    ctx.fillStyle=ca(I,0.24);\n    ctx.fillText('avanza para recorrer los niveles',padX+220,26);\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\n",
+                "stepCount": 5
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "mod-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "mod-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "mod-h1",
+                "effect": "slideIn",
+                "duration": 0.85,
+                "delay": 0.16,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 52
+              },
+              {
+                "nodeId": "mod-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.46,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "mod-s1",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "mod-block",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "mod-s2",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "mod-block",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "mod-s3",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "mod-block",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "mod-s4",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "mod-block",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "mod-s5",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "mod-block",
+                "effect": "codeStep"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sdk",
+      "name": "10 Más allá del CLI",
+      "slide": {
+        "id": "sdk",
+        "name": "10 Más allá del CLI",
+        "background": {
+          "type": "solid",
+          "color": "$colors.accent"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.7
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "sdk-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 190,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "10 — Más allá del CLI",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "sdk-h1",
+                "name": "Título",
+                "frame": {
+                  "x": 116,
+                  "y": 256,
+                  "w": 800,
+                  "h": 300
+                },
+                "type": "text",
+                "text": "De la terminal\na tu pipeline.",
+                "styleRef": "$textStyles.h1",
+                "style": {
+                  "fontSize": 84,
+                  "color": "$colors.canvas"
+                }
+              },
+              {
+                "id": "sdk-body",
+                "name": "Cuerpo",
+                "frame": {
+                  "x": 120,
+                  "y": 620,
+                  "w": 700,
+                  "h": 260
+                },
+                "type": "text",
+                "text": "El mismo arnés que usas a mano, empaquetado como librería. Lo que aprendes escribiendo en la terminal se despliega tal cual.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 28,
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "sdk-div",
+                "name": "Divisor",
+                "frame": {
+                  "x": 920,
+                  "y": 256,
+                  "w": 2,
+                  "h": 620
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.hairline"
+                }
+              },
+              {
+                "id": "sdk-list",
+                "name": "Lista",
+                "frame": {
+                  "x": 1010,
+                  "y": 256,
+                  "w": 790,
+                  "h": 460
+                },
+                "type": "text",
+                "text": "Modo headless para CI\nClaude Agent SDK\nComandos y skills propios\nPermisos, hooks y auditoría\nAgentes programados en la nube",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 32,
+                  "lineHeight": 2,
+                  "color": "$colors.canvas"
+                },
+                "list": "bullet"
+              },
+              {
+                "id": "sdk-foot",
+                "name": "Pie",
+                "frame": {
+                  "x": 1010,
+                  "y": 800,
+                  "w": 700,
+                  "h": 30
+                },
+                "type": "text",
+                "text": "Un arnés, muchos anfitriones",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.55,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.canvas"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "sdk-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "sdk-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "sdk-h1",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.16,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 56
+              },
+              {
+                "nodeId": "sdk-div",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0.34,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 180
+              },
+              {
+                "nodeId": "sdk-list",
+                "effect": "slideIn",
+                "duration": 0.9,
+                "delay": 0.48,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 34
+              },
+              {
+                "nodeId": "sdk-body",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 0.72,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "sdk-foot",
+                "effect": "fadeIn",
+                "duration": 0.7,
+                "delay": 0.95,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "cierre",
+      "name": "11 Cierre",
+      "slide": {
+        "id": "cierre",
+        "name": "11 Cierre",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.9
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "fin-3d",
+                "name": "Hero 3D de cierre",
+                "frame": {
+                  "x": 1180,
+                  "y": 140,
+                  "w": 760,
+                  "h": 760
+                },
+                "type": "code-block",
+                "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});\nrenderer.setPixelRatio(Math.min(devicePixelRatio||1,2));\nrenderer.setSize(innerWidth,innerHeight);\ndocument.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\nconst camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,0.1,100);\ncamera.position.set(0,0.4,7);\nconst knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.5,0.40,240,36),new THREE.MeshStandardMaterial({color:0x201915,metalness:0.93,roughness:0.22}));\nscene.add(knot);\nconst key=new THREE.PointLight(new THREE.Color(ACC),270);key.position.set(4,3,4);scene.add(key);\nconst rim=new THREE.PointLight(0x4A6CFF,130);rim.position.set(-5,-2,2);scene.add(rim);\nconst top=new THREE.PointLight(0xF4F1EA,64);top.position.set(0,6,-3);scene.add(top);\nscene.add(new THREE.AmbientLight(0x1a1512,2));\naddEventListener('resize',function(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});\nlet px=0,py=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nlet start=null;\nfunction frame(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const k=SKIP?1:expo(Math.min(t/1300,1));\n  px+=(tx-px)*0.04;py+=(ty-py)*0.04;\n  knot.scale.setScalar(0.6+0.4*k);\n  knot.position.y=(1-k)*-1.2+Math.sin(t/1700)*0.13;\n  knot.rotation.x=t/4600+py*0.35;\n  knot.rotation.y=t/3400+px*0.5;\n  key.intensity=270+Math.sin(t/940)*60;\n  renderer.render(scene,camera);\n  requestAnimationFrame(frame);\n}\nslidecode.onReveal(function(){requestAnimationFrame(frame);});\n",
+                "libs": [
+                  "three"
+                ]
+              },
+              {
+                "id": "fin-kicker",
+                "name": "Kicker",
+                "frame": {
+                  "x": 122,
+                  "y": 230,
+                  "w": 700,
+                  "h": 28
+                },
+                "type": "text",
+                "text": "Cierre",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "fin-1",
+                "name": "Línea 1",
+                "frame": {
+                  "x": 116,
+                  "y": 288,
+                  "w": 1000,
+                  "h": 280
+                },
+                "type": "text",
+                "text": "Escribe la\nintención.",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 126,
+                  "lineHeight": 0.94,
+                  "letterSpacing": -6
+                }
+              },
+              {
+                "id": "fin-2",
+                "name": "Línea 2",
+                "frame": {
+                  "x": 116,
+                  "y": 528,
+                  "w": 1000,
+                  "h": 280
+                },
+                "type": "text",
+                "text": "El resto\nes ejecución.",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 126,
+                  "lineHeight": 0.94,
+                  "letterSpacing": -6,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "fin-rule",
+                "name": "Filete",
+                "frame": {
+                  "x": 120,
+                  "y": 858,
+                  "w": 420,
+                  "h": 2
+                },
+                "opacity": 0.32,
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "fin-cta",
+                "name": "CTA",
+                "frame": {
+                  "x": 120,
+                  "y": 892,
+                  "w": 700,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "claude.ai/code",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 30,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "mark",
+                "name": "Wordmark chico",
+                "frame": {
+                  "x": 120,
+                  "y": 998,
+                  "w": 420,
+                  "h": 24
+                },
+                "opacity": 0.75,
+                "type": "text",
+                "text": "Claude Code",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontSize": 15,
+                  "letterSpacing": 5,
+                  "color": "$colors.ink"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "fin-in",
+            "trigger": "auto",
+            "actions": [
+              {
+                "nodeId": "fin-kicker",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.1,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "fin-1",
+                "effect": "slideIn",
+                "duration": 0.95,
+                "delay": 0.24,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 70
+              },
+              {
+                "nodeId": "fin-2",
+                "effect": "slideIn",
+                "duration": 0.95,
+                "delay": 0.46,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 70
+              },
+              {
+                "nodeId": "fin-rule",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0.88,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 340
+              },
+              {
+                "nodeId": "fin-cta",
+                "effect": "fadeIn",
+                "duration": 0.8,
+                "delay": 1.02,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "modules": [
+    {
+      "id": "cover-hero3d",
+      "name": "Hero 3D",
+      "node": {
+        "id": "cover-hero3d",
+        "name": "Hero 3D",
+        "frame": {
+          "x": 1040,
+          "y": 70,
+          "w": 920,
+          "h": 920
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst COOL='#4A6CFF';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});\nrenderer.setPixelRatio(Math.min(devicePixelRatio||1,2));\nrenderer.setSize(innerWidth,innerHeight);\ndocument.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\nconst camera=new THREE.PerspectiveCamera(36,innerWidth/innerHeight,0.1,100);\ncamera.position.set(0,0.3,7.2);\nconst group=new THREE.Group();scene.add(group);\nconst core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.85,0),new THREE.MeshStandardMaterial({color:0x1b1613,metalness:0.95,roughness:0.24,flatShading:true}));\ngroup.add(core);\nconst wire=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.45,1)),new THREE.LineBasicMaterial({color:new THREE.Color(ACC),transparent:true,opacity:0.2}));\ngroup.add(wire);\nconst N=210,pos=new Float32Array(N*3);\nfor(let i=0;i<N;i++){const a=i*2.39996,r=2.95+(Math.sin(i*12.9)*0.5+0.5)*1.75;pos[i*3]=Math.cos(a)*r;pos[i*3+1]=Math.cos(i*7.7)*2.05;pos[i*3+2]=Math.sin(a)*r;}\nconst dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.BufferAttribute(pos,3));\nconst dust=new THREE.Points(dg,new THREE.PointsMaterial({color:new THREE.Color(ACC),size:0.05,transparent:true,opacity:0.5}));\ngroup.add(dust);\nconst key=new THREE.PointLight(new THREE.Color(ACC),300);key.position.set(4,3,4);scene.add(key);\nconst rim=new THREE.PointLight(new THREE.Color(COOL),140);rim.position.set(-5,-2,2.5);scene.add(rim);\nconst top=new THREE.PointLight(0xF4F1EA,70);top.position.set(0,6,-3);scene.add(top);\nscene.add(new THREE.AmbientLight(0x1a1512,2.2));\naddEventListener('resize',function(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});\nlet px=0,py=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nlet start=null;\nfunction frame(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const k=SKIP?1:expo(Math.min(t/1500,1));\n  px+=(tx-px)*0.045;py+=(ty-py)*0.045;\n  group.scale.setScalar(0.55+0.45*k);\n  group.position.y=(1-k)*-1.4+Math.sin(t/1800)*0.14;\n  group.rotation.y=t/4400+px*0.55;\n  group.rotation.x=Math.sin(t/5400)*0.26+py*0.4;\n  wire.rotation.y=-t/6200;wire.rotation.z=t/8200;\n  dust.rotation.y=t/9200;\n  key.intensity=300+Math.sin(t/980)*70;\n  dust.material.opacity=(0.2+0.3*(Math.sin(t/1600)*0.5+0.5))*k;\n  wire.material.opacity=0.2*k;\n  renderer.render(scene,camera);\n  requestAnimationFrame(frame);\n}\nslidecode.onReveal(function(){requestAnimationFrame(frame);});\n",
+        "libs": [
+          "three"
+        ]
+      }
+    },
+    {
+      "id": "sup-block",
+      "name": "Superficies vivas",
+      "node": {
+        "id": "sup-block",
+        "name": "Superficies vivas",
+        "frame": {
+          "x": 120,
+          "y": 470,
+          "w": 1680,
+          "h": 420
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SURF=T['tone-1']||'#171311';\nconst HAIR=T.hairline||'#2A2521';\nconst LABELS=['TERMINAL','ESCRITORIO','WEB','IDE'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nfunction rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst DWELL=2300,INTRO=900;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const active=Math.floor(run/DWELL)%4;\n  const phase=(run%DWELL)/DWELL;\n  ctx.clearRect(0,0,W,H);\n  const gap=30,pw=(W-gap*3)/4,ph=H-64;\n  for(let i=0;i<4;i++){\n    const k=SKIP?1:expo(Math.min(Math.max((t-i*140)/720,0),1));\n    const x=i*(pw+gap),y=(1-k)*44,on=i===active;\n    ctx.globalAlpha=k;\n    ctx.fillStyle=SURF;rr(x,y,pw,ph,10);ctx.fill();\n    if(on){ctx.globalAlpha=k*0.09;ctx.fillStyle=ACC;rr(x-7,y-7,pw+14,ph+14,15);ctx.fill();ctx.globalAlpha=k;}\n    ctx.strokeStyle=on?ca(A,0.85):HAIR;ctx.lineWidth=on?2:1;rr(x,y,pw,ph,10);ctx.stroke();\n    ctx.fillStyle=ca(I,0.08);ctx.fillRect(x+1,y+1,pw-2,28);\n    for(let d=0;d<3;d++){ctx.beginPath();ctx.arc(x+20+d*15,y+15,3.2,0,6.2832);ctx.fillStyle=ca(I,0.26);ctx.fill();}\n    const rows=7,lh=24;\n    for(let r=0;r<rows;r++){\n      const ry=y+52+r*lh;\n      if(ry>y+ph-34)break;\n      const wf=0.28+rnd(i*9+r*3)*0.54;\n      const lit=on&&r<=Math.floor(phase*rows*1.55);\n      ctx.fillStyle=lit?ca(A,0.72):ca(I,0.13);\n      ctx.fillRect(x+20,ry,(pw-40)*wf,6);\n    }\n    if(on){\n      const rrw=Math.min(rows-1,Math.floor(phase*rows*1.55));\n      const ry=y+52+rrw*lh;\n      const wf=0.28+rnd(i*9+rrw*3)*0.54;\n      if(Math.floor(run/400)%2===0){ctx.fillStyle=INK;ctx.fillRect(x+20+(pw-40)*wf+6,ry-4,9,13);}\n    }\n    ctx.fillStyle=on?INK:ca(I,0.34);\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='left';\n    ctx.fillText(LABELS[i],x+2,H-14);\n    ctx.globalAlpha=1;\n  }\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "buc-block",
+      "name": "Órbita del agente",
+      "node": {
+        "id": "buc-block",
+        "name": "Órbita del agente",
+        "frame": {
+          "x": 1060,
+          "y": 200,
+          "w": 700,
+          "h": 700
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst MUT='rgba(244,241,234,0.34)';\nconst LABELS=['EXPLORAR','PLANEAR','EDITAR','VERIFICAR'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst PERIOD=3600,INTRO=1000;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const intro=SKIP?1:Math.min(t/INTRO,1);\n  const k=expo(intro);\n  const cx=W/2,cy=H/2+6,R=Math.min(W,H)*0.32;\n  ctx.clearRect(0,0,W,H);\n  ctx.strokeStyle='rgba(244,241,234,0.14)';ctx.lineWidth=1.5;\n  ctx.beginPath();ctx.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+Math.PI*2*k);ctx.stroke();\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const ang=-Math.PI/2+(run%PERIOD)/PERIOD*Math.PI*2;\n  const passes=Math.floor(run/PERIOD)*LABELS.length+Math.floor((run%PERIOD)/PERIOD*LABELS.length);\n  for(let i=0;i<LABELS.length;i++){\n    const a=-Math.PI/2+i*(Math.PI*2/LABELS.length);\n    const sx=cx+Math.cos(a)*R,sy=cy+Math.sin(a)*R;\n    const pop=SKIP?1:expo(Math.min(Math.max((t-460-i*130)/460,0),1));\n    const d=Math.abs(((ang-a)%(Math.PI*2)+Math.PI*3)%(Math.PI*2)-Math.PI);\n    const heat=intro>=1?Math.max(0,1-d/0.9):0;\n    ctx.globalAlpha=pop*(0.28+0.72*heat);ctx.fillStyle=ACC;\n    ctx.beginPath();ctx.arc(sx,sy,4.5+3.5*heat,0,Math.PI*2);ctx.fill();\n    if(heat>0.3){ctx.globalAlpha=pop*heat*0.30;ctx.beginPath();ctx.arc(sx,sy,12+9*heat,0,Math.PI*2);ctx.fill();}\n    ctx.globalAlpha=pop;ctx.fillStyle=heat>0.5?INK:MUT;\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='center';\n    const off=26+9*heat;\n    ctx.fillText(LABELS[i],sx+Math.cos(a)*off*1.5,sy+Math.sin(a)*off+5);\n    ctx.globalAlpha=1;\n  }\n  if(intro>=1){\n    for(let q=0;q<11;q++){\n      const qa=ang-q*0.042;\n      ctx.fillStyle=ACC;ctx.globalAlpha=(1-q/11)*0.9;\n      ctx.beginPath();ctx.arc(cx+Math.cos(qa)*R,cy+Math.sin(qa)*R,4.2-q*0.28,0,Math.PI*2);ctx.fill();\n    }\n    ctx.globalAlpha=1;\n  }\n  ctx.textAlign='center';ctx.globalAlpha=k;\n  ctx.fillStyle=INK;ctx.font='italic 400 58px Georgia, serif';\n  ctx.fillText(String(passes),cx,cy+14);\n  ctx.fillStyle=MUT;ctx.font='600 11px ui-monospace, Menlo, monospace';\n  ctx.fillText('ITERACIONES',cx,cy+40);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "her-block",
+      "name": "Actividad de herramientas",
+      "node": {
+        "id": "her-block",
+        "name": "Actividad de herramientas",
+        "frame": {
+          "x": 120,
+          "y": 470,
+          "w": 1680,
+          "h": 420
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst TOOLS=['read','edit','bash','grep','glob','web'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst COLS=30,TICK=250,INTRO=800;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  const n=Math.floor(run/TICK);\n  ctx.clearRect(0,0,W,H);\n  const padL=130,padT=54,gap=5;\n  const cw=(W-padL-gap*(COLS-1))/COLS;\n  const ch=(H-padT-26-gap*(TOOLS.length-1))/TOOLS.length;\n  for(let r=0;r<TOOLS.length;r++){\n    const k=SKIP?1:expo(Math.min(Math.max((t-r*95)/640,0),1));\n    const y=padT+r*(ch+gap);\n    ctx.globalAlpha=k;\n    for(let col=0;col<COLS;col++){ctx.fillStyle=ca(I,0.055);ctx.fillRect(padL+col*(cw+gap),y,cw,ch);}\n    ctx.fillStyle=ca(I,0.40);\n    ctx.font='600 14px ui-monospace, Menlo, monospace';ctx.textAlign='right';\n    ctx.fillText(TOOLS[r],padL-20,y+ch/2+5);\n    ctx.globalAlpha=1;\n  }\n  for(let i=Math.max(0,n-COLS+1);i<=n;i++){\n    const r=Math.floor(rnd(i*13+1)*TOOLS.length);\n    const col=i%COLS;\n    const age=(n-i)/COLS;\n    const a=Math.max(0,1-age);\n    const y=padT+r*(ch+gap),x=padL+col*(cw+gap);\n    ctx.fillStyle=ca(A,0.14+0.76*a*a);\n    ctx.fillRect(x,y,cw,ch);\n    if(a>0.95){ctx.globalAlpha=0.26;ctx.fillStyle=ACC;ctx.fillRect(x-5,y-5,cw+10,ch+10);ctx.globalAlpha=1;}\n  }\n  const ik=SKIP?1:expo(Math.min(t/640,1));\n  ctx.globalAlpha=ik;ctx.textAlign='left';\n  ctx.font='600 14px ui-monospace, Menlo, monospace';\n  ctx.fillStyle=ca(I,0.40);ctx.fillText('LLAMADAS',padL,28);\n  ctx.fillStyle=INK;ctx.fillText(String(n).length>3?String(n):('000'+n).slice(-4),padL+108,28);\n  ctx.fillStyle=ACC;ctx.fillText('> '+TOOLS[Math.floor(rnd(n*13+1)*TOOLS.length)],padL+220,28);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "skl-block",
+      "name": "Divulgación progresiva",
+      "node": {
+        "id": "skl-block",
+        "name": "Divulgación progresiva",
+        "frame": {
+          "x": 1000,
+          "y": 240,
+          "w": 800,
+          "h": 620
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SURF=T['tone-1']||'#171311';\nconst HAIR=T.hairline||'#2A2521';\nconst L=[['NOMBRE + DESCRIPCIÓN','siempre en contexto',1],['SKILL.md','se lee cuando aplica',4],['reference/ · scripts/','se abre si hace falta',7]];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nfunction rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst A=toRGB(ACC),I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst STEP=1600,HOLD=2700,CLOSE=1000,TOTAL=STEP*3+HOLD+CLOSE;\nconst HEAD=66,LH=18,LG=10;\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:600));\n  const p=run%TOTAL;\n  ctx.clearRect(0,0,W,H);\n  let y=0;\n  for(let i=0;i<3;i++){\n    let o;\n    if(p<STEP*3){o=Math.min(Math.max((p-i*STEP)/(STEP*0.8),0),1);}\n    else if(p<STEP*3+HOLD){o=1;}\n    else {const cp=(p-STEP*3-HOLD)/CLOSE;o=1-Math.min(Math.max(cp*1.4-(2-i)*0.14,0),1);}\n    o=expo(o);\n    const inner=L[i][2]*(LH+LG)+16;\n    const h=HEAD+o*inner;\n    ctx.fillStyle=SURF;rr(0,y,W,h,8);ctx.fill();\n    if(o>0.04){ctx.globalAlpha=o*0.06;ctx.fillStyle=ACC;rr(-5,y-5,W+10,h+10,12);ctx.fill();ctx.globalAlpha=1;}\n    ctx.strokeStyle=o>0.04?ca(A,0.18+0.52*o):HAIR;ctx.lineWidth=1.4;\n    rr(0,y,W,h,8);ctx.stroke();\n    ctx.fillStyle=ca(A,0.30+0.70*o);\n    ctx.fillRect(0,y+20,4,HEAD-40);\n    ctx.textAlign='left';\n    ctx.font='600 15px ui-monospace, Menlo, monospace';\n    ctx.fillStyle=o>0.5?INK:ca(I,0.52);\n    ctx.fillText(L[i][0],24,y+31);\n    ctx.font='400 13px ui-monospace, Menlo, monospace';\n    ctx.fillStyle=ca(I,0.36);\n    ctx.fillText(L[i][1],24,y+52);\n    for(let r=0;r<L[i][2];r++){\n      const lk=Math.min(Math.max(o*1.6-r*0.12,0),1);\n      if(lk<=0)continue;\n      const wf=0.30+rnd(i*7+r*3)*0.58;\n      ctx.fillStyle=ca(I,0.09+0.15*lk);\n      ctx.fillRect(24,y+HEAD+r*(LH+LG),(W-48)*wf*lk,6);\n    }\n    y+=h+14;\n  }\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "sub-block",
+      "name": "Fan-out de subagentes",
+      "node": {
+        "id": "sub-block",
+        "name": "Fan-out de subagentes",
+        "frame": {
+          "x": 880,
+          "y": 170,
+          "w": 960,
+          "h": 740
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst N=5,OUT=1000,WORK=2200,BACK=1300,ABS=1100,CY=OUT+WORK+BACK+ABS;\nlet px=0,tx=0;\nslidecode.onPointer(function(p){tx=(p&&p.inside)?(p.y-0.5):0;});\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:500));\n  const cyc=Math.floor(run/CY),p=run%CY;\n  px+=(tx-px)*0.05;\n  ctx.clearRect(0,0,W,H);\n  const cx=W*0.15,cy=H*0.5+px*26,R=W*0.66;\n  for(let i=0;i<N;i++){\n    const a=-0.55+(i/(N-1))*1.10;\n    const sx=cx+Math.cos(a)*R,sy=cy+Math.sin(a)*R*0.56;\n    const g=Math.min(Math.max((p-i*130)/OUT,0),1);\n    const k=expo(g);\n    ctx.strokeStyle=ca(I,0.15);ctx.lineWidth=1.2;\n    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+(sx-cx)*k,cy+(sy-cy)*k);ctx.stroke();\n    if(k<=0.03)continue;\n    const working=p>OUT&&p<OUT+WORK;\n    const pulse=(Math.sin((run+i*420)/280)+1)/2;\n    ctx.fillStyle=ACC;ctx.globalAlpha=k*(working?0.72+0.28*pulse:0.5);\n    ctx.beginPath();ctx.arc(sx,sy,5.5,0,6.2832);ctx.fill();\n    if(working){ctx.globalAlpha=k*0.16*pulse;ctx.beginPath();ctx.arc(sx,sy,17+9*pulse,0,6.2832);ctx.fill();}\n    ctx.globalAlpha=1;\n    if(p>OUT){\n      const wp=Math.min(Math.max((p-OUT)/WORK,0),1);\n      for(let b=0;b<3;b++){\n        const bk=Math.min(Math.max(wp*1.5-b*0.26,0),1);\n        if(bk<=0)continue;\n        ctx.fillStyle=ca(I,0.12+0.11*bk);\n        ctx.fillRect(sx+16,sy-10+b*8,50*bk,4);\n      }\n    }\n    if(p>OUT+WORK){\n      const rp=Math.min((p-OUT-WORK)/BACK,1);\n      const e=1-Math.pow(1-rp,3);\n      const ax=sx+(cx-sx)*e,ay=sy+(cy-sy)*e;\n      ctx.fillStyle=ACC;\n      ctx.beginPath();ctx.arc(ax,ay,3.8,0,6.2832);ctx.fill();\n      ctx.globalAlpha=0.22;ctx.beginPath();ctx.arc(ax,ay,10,0,6.2832);ctx.fill();ctx.globalAlpha=1;\n    }\n    ctx.font='600 11px ui-monospace, Menlo, monospace';ctx.textAlign='left';\n    ctx.fillStyle=ca(I,0.32*k);\n    ctx.fillText('agente '+(i+1),sx+16,sy+28);\n  }\n  const absorbing=p>OUT+WORK+BACK;\n  const cp=absorbing?(p-OUT-WORK-BACK)/ABS:0;\n  ctx.strokeStyle=absorbing?'rgba(217,119,87,'+(0.62*(1-cp)).toFixed(3)+')':'rgba(217,119,87,0.26)';\n  ctx.lineWidth=2;\n  ctx.beginPath();ctx.arc(cx,cy,26+(absorbing?cp*38:0),0,6.2832);ctx.stroke();\n  ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(cx,cy,11,0,6.2832);ctx.fill();\n  const back=p>OUT+WORK?Math.min(N,Math.floor((p-OUT-WORK)/(BACK/N))+1):0;\n  const found=cyc*N+back;\n  ctx.textAlign='center';\n  ctx.fillStyle=INK;ctx.font='italic 400 46px Georgia, serif';\n  ctx.fillText(String(found),cx,cy+96);\n  ctx.fillStyle=ca(I,0.36);ctx.font='600 10px ui-monospace, Menlo, monospace';\n  ctx.fillText('HALLAZGOS',cx,cy+120);\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "mcp-block",
+      "name": "Hub MCP",
+      "node": {
+        "id": "mcp-block",
+        "name": "Hub MCP",
+        "frame": {
+          "x": 830,
+          "y": 150,
+          "w": 1010,
+          "h": 800
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst EPS=['github','postgres','figma','slack','archivos','http'];\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nconst rnd=function(n){const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nconst HUB=54,PK=640,INTRO=1000;\nlet mx=0,my=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nlet start=null;\nfunction draw(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const run=Math.max(0,t-(SKIP?0:INTRO));\n  mx+=(tx-mx)*0.05;my+=(ty-my)*0.05;\n  ctx.clearRect(0,0,W,H);\n  const cx=W*0.5+mx*22,cy=H*0.5+my*18,R=Math.min(W,H)*0.36;\n  for(let i=0;i<6;i++){\n    const a=-Math.PI/2+i*(Math.PI/3);\n    const ex=cx+Math.cos(a)*R,ey=cy+Math.sin(a)*R;\n    const k=SKIP?1:expo(Math.min(Math.max((t-i*120)/900,0),1));\n    const sx=cx+Math.cos(a)*HUB,sy=cy+Math.sin(a)*HUB;\n    ctx.strokeStyle=ca(I,0.17);ctx.lineWidth=1.2;\n    ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+(ex-sx)*k,sy+(ey-sy)*k);ctx.stroke();\n    if(k<0.9)continue;\n    ctx.fillStyle=ACC;ctx.globalAlpha=0.55;\n    ctx.beginPath();ctx.arc(ex,ey,6,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.12;\n    ctx.beginPath();ctx.arc(ex,ey,16,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n    ctx.font='600 13px ui-monospace, Menlo, monospace';\n    ctx.textAlign=Math.cos(a)>0.2?'left':(Math.cos(a)<-0.2?'right':'center');\n    const off=Math.cos(a)>0.2?20:(Math.cos(a)<-0.2?-20:0);\n    ctx.fillStyle=ca(I,0.46);\n    ctx.fillText(EPS[i],ex+off,ey+(Math.abs(Math.cos(a))<0.2?(Math.sin(a)>0?30:-20):5));\n  }\n  const n=Math.floor(run/PK);\n  for(let j=Math.max(0,n-4);j<=n;j++){\n    const at=j*PK;\n    const age=(run-at)/1000;\n    if(age<0||age>1)continue;\n    const idx=Math.floor(rnd(j*7+5)*6);\n    const a=-Math.PI/2+idx*(Math.PI/3);\n    const sx=cx+Math.cos(a)*HUB,sy=cy+Math.sin(a)*HUB;\n    const ex=cx+Math.cos(a)*R,ey=cy+Math.sin(a)*R;\n    const inbound=rnd(j*3+1)>0.5;\n    const e=1-Math.pow(1-age,2.2);\n    const f=inbound?1-e:e;\n    const x=sx+(ex-sx)*f,y=sy+(ey-sy)*f;\n    ctx.fillStyle=ACC;ctx.globalAlpha=0.95;\n    ctx.beginPath();ctx.arc(x,y,3.6,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.20;\n    ctx.beginPath();ctx.arc(x,y,10,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n  }\n  const hp=Math.max(0,1-((run%PK)/400));\n  const ik=SKIP?1:expo(Math.min(t/900,1));\n  ctx.globalAlpha=ik;\n  ctx.strokeStyle=ca(I,0.20);ctx.lineWidth=1.4;\n  ctx.beginPath();ctx.arc(cx,cy,HUB,0,6.2832);ctx.stroke();\n  ctx.strokeStyle='rgba(217,119,87,'+(0.55*hp).toFixed(3)+')';ctx.lineWidth=2;\n  ctx.beginPath();ctx.arc(cx,cy,HUB+8+hp*16,0,6.2832);ctx.stroke();\n  ctx.fillStyle='rgba(217,119,87,'+(0.10+0.10*hp).toFixed(3)+')';\n  ctx.beginPath();ctx.arc(cx,cy,HUB-4,0,6.2832);ctx.fill();\n  ctx.textAlign='center';\n  ctx.fillStyle=INK;ctx.font='600 15px ui-monospace, Menlo, monospace';\n  ctx.fillText('MCP',cx,cy+6);\n  ctx.globalAlpha=1;\n  requestAnimationFrame(draw);\n}\nslidecode.onReveal(function(){requestAnimationFrame(draw);});\n"
+      }
+    },
+    {
+      "id": "mod-block",
+      "name": "Escalera de esfuerzo",
+      "node": {
+        "id": "mod-block",
+        "name": "Escalera de esfuerzo",
+        "frame": {
+          "x": 120,
+          "y": 470,
+          "w": 1680,
+          "h": 420
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst INK=T.ink||'#F4F1EA';\nconst STOPS=[['low','respuestas rápidas'],['medium','trabajo cotidiano'],['high','el valor por defecto'],['xhigh','código y agentes'],['max','cuando la exactitud manda']];\nconst TOTAL=STOPS.length;\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst c=document.createElement('canvas');document.body.appendChild(c);\nconst ctx=c.getContext('2d');\nconst dpr=Math.min(devicePixelRatio||1,2);\nlet W,H;\nfunction size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}\nsize();addEventListener('resize',size);\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nfunction toRGB(h){const s=String(h).slice(1,7);const n=parseInt(s,16)||0;return [(n>>16)&255,(n>>8)&255,n&255];}\nconst I=toRGB(INK);\nfunction ca(k,a){return 'rgba('+k[0]+','+k[1]+','+k[2]+','+a.toFixed(3)+')';}\nfunction target(){return slidecode.mode==='edit'?TOTAL:Math.max(0,Math.min(TOTAL,slidecode.step));}\nlet prog=target();\nslidecode.onModeChange(function(){});\nslidecode.onStep(function(){});\nlet last=null;\nfunction draw(now){\n  if(last===null)last=now;\n  const dt=Math.min(64,now-last);last=now;\n  prog+=(target()-prog)*Math.min(1,dt/240);\n  ctx.clearRect(0,0,W,H);\n  const padX=50,ty=H*0.70,maxH=ty-46;\n  const slot=(W-padX*2)/TOTAL;\n  const xs=[];for(let i=0;i<TOTAL;i++)xs.push(padX+(i+0.5)*slot);\n  const bw=slot*0.42;\n  const cur=Math.max(0,Math.min(TOTAL-1,Math.round(prog)-1));\n  for(let i=0;i<TOTAL;i++){\n    const f=expo(Math.min(Math.max(prog-i,0),1));\n    if(f<=0.005)continue;\n    const bh=(0.20+0.17*i)*maxH*f;\n    const on=i===cur&&prog>0.4;\n    ctx.fillStyle=on?ca(toRGB(ACC),0.85):'rgba(217,119,87,0.22)';\n    ctx.fillRect(xs[i]-bw/2,ty-bh,bw,bh);\n    if(on){ctx.globalAlpha=0.10;ctx.fillStyle=ACC;ctx.fillRect(xs[i]-bw/2-8,ty-bh-8,bw+16,bh+8);ctx.globalAlpha=1;}\n  }\n  ctx.strokeStyle=ca(I,0.14);ctx.lineWidth=1.5;\n  ctx.beginPath();ctx.moveTo(padX,ty);ctx.lineTo(W-padX,ty);ctx.stroke();\n  let mxp=xs[0];\n  if(prog>0.02){\n    const idx=Math.max(0,Math.min(TOTAL-1,prog-1));\n    const i0=Math.floor(idx),fr=idx-i0;\n    mxp=xs[i0]+(xs[Math.min(i0+1,TOTAL-1)]-xs[i0])*fr;\n    ctx.strokeStyle='rgba(217,119,87,0.6)';ctx.lineWidth=2;\n    ctx.beginPath();ctx.moveTo(padX,ty);ctx.lineTo(mxp,ty);ctx.stroke();\n  }\n  for(let i=0;i<TOTAL;i++){\n    const f=Math.min(Math.max(prog-i,0),1);\n    ctx.fillStyle=i===cur&&prog>0.4?ACC:ca(I,0.22+0.22*f);\n    ctx.beginPath();ctx.arc(xs[i],ty,i===cur&&prog>0.4?5:3.4,0,6.2832);ctx.fill();\n    ctx.font='600 13px ui-monospace, Menlo, monospace';ctx.textAlign='center';\n    ctx.fillStyle=i===cur&&prog>0.4?INK:ca(I,0.26+0.24*f);\n    ctx.fillText('0'+(i+1)+'  '+STOPS[i][0].toUpperCase(),xs[i],ty+34);\n  }\n  if(prog>0.02){\n    const wob=Math.sin(now/320)*0.14+1;\n    ctx.fillStyle=ACC;\n    ctx.beginPath();ctx.arc(mxp,ty,7.5*wob,0,6.2832);ctx.fill();\n    ctx.globalAlpha=0.22;\n    ctx.beginPath();ctx.arc(mxp,ty,15*wob,0,6.2832);ctx.fill();\n    ctx.globalAlpha=1;\n  }\n  ctx.textAlign='left';\n  ctx.font='600 13px ui-monospace, Menlo, monospace';\n  ctx.fillStyle=ca(I,0.36);\n  ctx.fillText('NIVEL DE ESFUERZO',padX,26);\n  if(prog>0.3){\n    ctx.fillStyle=ACC;\n    ctx.fillText(STOPS[cur][0].toUpperCase()+'  ·  '+STOPS[cur][1],padX+220,26);\n  } else {\n    ctx.fillStyle=ca(I,0.24);\n    ctx.fillText('avanza para recorrer los niveles',padX+220,26);\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\n",
+        "stepCount": 5
+      }
+    },
+    {
+      "id": "fin-3d",
+      "name": "Hero 3D de cierre",
+      "node": {
+        "id": "fin-3d",
+        "name": "Hero 3D de cierre",
+        "frame": {
+          "x": 1180,
+          "y": 140,
+          "w": 760,
+          "h": 760
+        },
+        "type": "code-block",
+        "code": "const T=(slidecode.theme&&slidecode.theme.colors)||{};\nconst ACC=T.accent||'#D97757';\nconst SKIP=slidecode.mode==='edit';\ndocument.body.style.cssText='margin:0;overflow:hidden;background:transparent';\nconst renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});\nrenderer.setPixelRatio(Math.min(devicePixelRatio||1,2));\nrenderer.setSize(innerWidth,innerHeight);\ndocument.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\nconst camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,0.1,100);\ncamera.position.set(0,0.4,7);\nconst knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.5,0.40,240,36),new THREE.MeshStandardMaterial({color:0x201915,metalness:0.93,roughness:0.22}));\nscene.add(knot);\nconst key=new THREE.PointLight(new THREE.Color(ACC),270);key.position.set(4,3,4);scene.add(key);\nconst rim=new THREE.PointLight(0x4A6CFF,130);rim.position.set(-5,-2,2);scene.add(rim);\nconst top=new THREE.PointLight(0xF4F1EA,64);top.position.set(0,6,-3);scene.add(top);\nscene.add(new THREE.AmbientLight(0x1a1512,2));\naddEventListener('resize',function(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});\nlet px=0,py=0,tx=0,ty=0;\nslidecode.onPointer(function(p){if(p&&p.inside){tx=p.x-0.5;ty=p.y-0.5;}else{tx=0;ty=0;}});\nconst expo=function(t){return t>=1?1:1-Math.pow(2,-10*t);};\nlet start=null;\nfunction frame(now){\n  if(start===null)start=now;\n  const t=now-start;\n  const k=SKIP?1:expo(Math.min(t/1300,1));\n  px+=(tx-px)*0.04;py+=(ty-py)*0.04;\n  knot.scale.setScalar(0.6+0.4*k);\n  knot.position.y=(1-k)*-1.2+Math.sin(t/1700)*0.13;\n  knot.rotation.x=t/4600+py*0.35;\n  knot.rotation.y=t/3400+px*0.5;\n  key.intensity=270+Math.sin(t/940)*60;\n  renderer.render(scene,camera);\n  requestAnimationFrame(frame);\n}\nslidecode.onReveal(function(){requestAnimationFrame(frame);});\n",
+        "libs": [
+          "three"
+        ]
+      }
+    }
+  ],
+  "specimen": "cover",
+  "guide": {
+    "margin": 58
+  }
+}
