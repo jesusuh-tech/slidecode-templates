@@ -28,5 +28,12 @@
     "file": "templates/cromatica-el-color-y-la-alegria.sctemplate",
     "version": "1.0.0",
     "author": "Jesus Hurtado"
+  },
+  {
+    "id": "portafolio-creativo-vol-02",
+    "name": "Portafolio Creativo — VOL. 02",
+    "file": "templates/portafolio-creativo-vol-02.sctemplate",
+    "version": "1.0.0",
+    "author": "Jesus Hurtado"
   }
 ]
