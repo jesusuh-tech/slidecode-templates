@@ -2,7 +2,10 @@
   "sctemplate": "0.1",
   "meta": {
     "id": "elegant-creme",
-    "name": "Elegant Creme"
+    "name": "Elegant Creme",
+    "author": "slidecode",
+    "description": "Papel cálido, serifa editorial y mucho aire. Para propuestas que se leen despacio.",
+    "version": "1.0.1"
   },
   "theme": {
     "colors": {

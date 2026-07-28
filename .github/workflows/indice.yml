@@ -1,0 +1,58 @@
+---
+# EL ÍNDICE SE REGENERA SOLO AL ENTRAR A MAIN.
+#
+# `index.json` era editado a mano por cada publicación, siempre añadiendo al FINAL del array. Dos
+# templates publicados antes de que el primero se mergeara tocaban las mismas líneas y git los daba
+# por conflicto — por construcción, no por error de nadie. Ahora el índice es DERIVADO: publicar
+# solo añade `templates/<id>.sctemplate`, y dos archivos nuevos distintos no pueden chocar.
+#
+# Corre solo en `main` y no en los pull requests, a propósito: durante un PR el índice está
+# legítimamente desactualizado (el archivo entró, el índice todavía no), así que un chequeo ahí
+# fallaría en cada publicación y enseñaría a ignorarlo.
+#
+# El push lo hace `GITHUB_TOKEN`, y los pushes con ese token NO disparan workflows — así que esto no
+# se puede llamar a sí mismo en bucle.
+name: índice
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "templates/**"
+      - "scripts/indice.mjs"
+      - ".github/workflows/indice.yml"
+  workflow_dispatch:
+
+# Sin esto el push del final falla con 403: el token es de solo lectura por defecto.
+permissions:
+  contents: write
+
+# Dos merges seguidos regenerarían el mismo archivo a la vez y el segundo push rebotaría.
+# En cola, no en paralelo — y sin cancelar, porque cada merge trae un template distinto.
+concurrency:
+  group: indice
+  cancel-in-progress: false
+
+jobs:
+  regenerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Regenerar index.json desde templates/
+        run: node scripts/indice.mjs
+
+      - name: Commitear si cambió
+        run: |
+          if git diff --quiet -- index.json; then
+            echo "index.json ya estaba al día: nada que hacer."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git commit -m "index.json: regenerado desde templates/"
+          git push

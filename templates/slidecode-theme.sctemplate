@@ -2,7 +2,10 @@
   "sctemplate": "0.1",
   "meta": {
     "id": "slidecode-theme",
-    "name": "SLIDECODE THEME"
+    "name": "SLIDECODE THEME",
+    "author": "slidecode",
+    "description": "El tema de la casa: mono-noir, ámbar y una retícula que se nota poco.",
+    "version": "1.0.1"
   },
   "size": {
     "width": 1280,

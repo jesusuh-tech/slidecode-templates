@@ -2,7 +2,9 @@
   "sctemplate": "0.1",
   "meta": {
     "id": "claude-code",
-    "name": "Claude Code"
+    "name": "Claude Code",
+    "author": "Jesus Hurtado",
+    "version": "1.0.1"
   },
   "size": {
     "width": 1920,
