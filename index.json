@@ -30,6 +30,13 @@
     "author": "Jesus Hurtado"
   },
   {
+    "id": "portafolio-verano-template",
+    "name": "Portafolio Verano — template",
+    "file": "templates/portafolio-verano-template.sctemplate",
+    "version": "1.0.0",
+    "author": "Jesus Hurtado"
+  },
+  {
     "id": "portafolio-creativo-vol-02",
     "name": "Portafolio Creativo — VOL. 02",
     "file": "templates/portafolio-creativo-vol-02.sctemplate",

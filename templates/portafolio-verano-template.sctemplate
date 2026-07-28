@@ -1,0 +1,3232 @@
+{
+  "sctemplate": "0.1",
+  "meta": {
+    "id": "portafolio-verano-template",
+    "name": "Portafolio Verano — template",
+    "author": "Jesus Hurtado"
+  },
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "theme": {
+    "colors": {
+      "canvas": "#070706",
+      "ink": "#8E887C",
+      "muted": "#E9E5DC",
+      "accent": "#D9A15B",
+      "tone-1": "#231F1B"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Poppins",
+      "mono": "Sometype Mono"
+    },
+    "fontFaces": [
+      {
+        "family": "Poppins",
+        "src": "https://mcp.slidecode.app/catalogo/asset/3dc5d0c52428fe1696264907a1054ebbaac07f8cbe45832c105f819c2ae397c0.woff2",
+        "weight": 400,
+        "style": "normal"
+      },
+      {
+        "family": "Poppins",
+        "src": "https://mcp.slidecode.app/catalogo/asset/289e0afc8be731a86822349e54557296f145926496bd2138db1bac0db77f77a2.woff2",
+        "weight": 500,
+        "style": "normal"
+      },
+      {
+        "family": "Poppins",
+        "src": "https://mcp.slidecode.app/catalogo/asset/4ef5511d8e7b39ae3f98ffed14d6071d7914e0c145fee5a79bb43aa962ff0fc4.woff2",
+        "weight": 800,
+        "style": "normal"
+      },
+      {
+        "family": "Poppins",
+        "src": "https://mcp.slidecode.app/catalogo/asset/d1ebe21db0d30b4c6eff465086295804e94f0ae5ec05c47c45b0d602bf180f0f.woff2",
+        "weight": 900,
+        "style": "normal"
+      },
+      {
+        "family": "Sometype Mono",
+        "src": "https://mcp.slidecode.app/catalogo/asset/b0fd50aef6ca5b76a75cd16251c9ab7a367edce9afaabb0c67a53bfd0251a815.woff2",
+        "weight": 400,
+        "style": "normal"
+      }
+    ],
+    "textStyles": {
+      "display": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 340,
+        "fontWeight": 900,
+        "lineHeight": 0.84,
+        "letterSpacing": -14,
+        "color": "$colors.muted",
+        "textTransform": "uppercase"
+      },
+      "h1": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 120,
+        "fontWeight": 800,
+        "lineHeight": 0.92,
+        "letterSpacing": -3.5,
+        "color": "$colors.muted",
+        "textTransform": "uppercase"
+      },
+      "body": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 26,
+        "fontWeight": 400,
+        "lineHeight": 1.62,
+        "color": "$colors.ink"
+      },
+      "code": {
+        "fontFamily": "$fonts.mono",
+        "fontSize": 19,
+        "fontWeight": 400,
+        "letterSpacing": 1.2,
+        "color": "$colors.accent",
+        "textTransform": "uppercase"
+      },
+      "h2": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 34,
+        "fontWeight": 800,
+        "lineHeight": 1.15,
+        "letterSpacing": -0.4,
+        "color": "$colors.muted"
+      },
+      "caption": {
+        "fontFamily": "$fonts.display",
+        "fontSize": 17,
+        "fontWeight": 500,
+        "lineHeight": 1.4,
+        "letterSpacing": 2.6,
+        "color": "$colors.ink",
+        "textTransform": "uppercase"
+      }
+    }
+  },
+  "layouts": [
+    {
+      "id": "cover",
+      "name": "Portada",
+      "slide": {
+        "id": "cover",
+        "name": "Portada",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "cover-title",
+                "frame": {
+                  "x": 64,
+                  "y": 120,
+                  "w": 1400,
+                  "h": 600
+                },
+                "type": "text",
+                "text": "Porta\nFolio.",
+                "styleRef": "$textStyles.display"
+              },
+              {
+                "id": "cover-rule",
+                "frame": {
+                  "x": 90,
+                  "y": 742,
+                  "w": 140,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "cover-meta-1",
+                "frame": {
+                  "x": 1330,
+                  "y": 170,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "cover-meta-2",
+                "frame": {
+                  "x": 1330,
+                  "y": 206,
+                  "w": 500,
+                  "h": 120
+                },
+                "type": "text",
+                "text": "Presentación creativa\nPresentado por: Mara Vidal",
+                "styleRef": "$textStyles.h2",
+                "style": {
+                  "fontSize": 30,
+                  "lineHeight": 1.45,
+                  "align": "right"
+                }
+              },
+              {
+                "id": "cover-lede",
+                "frame": {
+                  "x": 90,
+                  "y": 780,
+                  "w": 1180,
+                  "h": 120
+                },
+                "type": "text",
+                "text": "Dirección de arte y fotografía para marcas que viven al sol. Una selección de trabajo editorial, identidad y campaña realizada entre 2023 y 2026.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "c-b1",
+            "trigger": "auto",
+            "delay": 0.15,
+            "actions": [
+              {
+                "nodeId": "cover-title",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 70
+              }
+            ]
+          },
+          {
+            "id": "c-b2",
+            "trigger": "auto",
+            "delay": 0.7,
+            "actions": [
+              {
+                "nodeId": "cover-meta-1",
+                "effect": "fadeIn",
+                "duration": 0.45,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "cover-meta-2",
+                "effect": "fadeIn",
+                "duration": 0.45,
+                "delay": 0.08,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "cover-rule",
+                "effect": "scaleIn",
+                "duration": 0.45,
+                "delay": 0.16,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "cover-lede",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0.24,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ],
+        "notes": "ADN DE MARCA — ESTUDIO VERANO\nMood: portafolio editorial de verano. Negro absoluto, tipografía geométrica descomunal (Poppins Black), fotografía cálida de luz natural como único color. Calma con filo.\nSistema: canvas #070706 · ink #E9E5DC · muted #8E887C · accent #D9A15B (arena, UNO por lámina) · hairline #231F1B.\nTipografía: Poppins 900 para display (ls muy negativo, uppercase), 800 para títulos, 400 para cuerpo. Cargada de verdad en theme.fontFaces.\nGesto distintivo: el display sangra fuera del margen izquierdo; el cromo (kicker arriba-izq, fecha arriba-der, wordmark + contacto abajo) se repite idéntico en todas las láminas y se queda quieto en los morph.\nDO: una sola idea por lámina · 40-70% de aire · foto a sangre por un solo borde · numerales gigantes en accent.\nDON'T: centrar todo · más de un acento · foto con azul saturado · degradados · sombras suaves · íconos.\nFotografía: Unsplash, paleta cálida/neutra (arena, piedra, paja, blanco). Nunca turquesa saturado."
+      }
+    },
+    {
+      "id": "intro",
+      "name": "Introducción",
+      "slide": {
+        "id": "intro",
+        "name": "Introducción",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s2-h",
+                "frame": {
+                  "x": 88,
+                  "y": 160,
+                  "w": 900,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "Introducción",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "s2-rule",
+                "frame": {
+                  "x": 90,
+                  "y": 330,
+                  "w": 120,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s2-body",
+                "frame": {
+                  "x": 90,
+                  "y": 394,
+                  "w": 600,
+                  "h": 340
+                },
+                "type": "text",
+                "text": "Estudio Verano es un taller pequeño de dirección de arte con base en Valparaíso. Trabajamos en el cruce entre fotografía, tipografía y luz natural.\n\nPiezas que se sienten calmas y nunca tibias: encuadre limpio, sombra dura, una sola idea por página.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "s2-tag",
+                "frame": {
+                  "x": 90,
+                  "y": 800,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "2016 — 2026 · diez años de verano",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "story-img",
+                "frame": {
+                  "x": 1180,
+                  "y": 160,
+                  "w": 380,
+                  "h": 620
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/9902cd6e6b422e8c55b4eebf90f0db38598d4560e5790dad8a3160ba45b0ae5d.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s2-img-b",
+                "frame": {
+                  "x": 1590,
+                  "y": 160,
+                  "w": 240,
+                  "h": 620
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/68eb14e32fa8d916ddb8f00ae015566383d6b01acf2f25486a74c6eefb413b8b.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s2-b1",
+            "trigger": "auto",
+            "delay": 0.1,
+            "actions": [
+              {
+                "nodeId": "s2-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              },
+              {
+                "nodeId": "s2-rule",
+                "effect": "scaleIn",
+                "duration": 0.4,
+                "delay": 0.14,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "s2-b2",
+            "trigger": "auto",
+            "delay": 0.35,
+            "actions": [
+              {
+                "nodeId": "story-img",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 60
+              },
+              {
+                "nodeId": "s2-img-b",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0.1,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 60
+              }
+            ]
+          },
+          {
+            "id": "s2-b3",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s2-body",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s2-tag",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "hello",
+      "name": "Hola, soy",
+      "slide": {
+        "id": "hello",
+        "name": "Hola, soy",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.9
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "story-img",
+                "frame": {
+                  "x": 1000,
+                  "y": 90,
+                  "w": 830,
+                  "h": 860
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/9902cd6e6b422e8c55b4eebf90f0db38598d4560e5790dad8a3160ba45b0ae5d.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s3-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 636,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Hola, soy",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s3-h",
+                "frame": {
+                  "x": 88,
+                  "y": 672,
+                  "w": 820,
+                  "h": 300
+                },
+                "type": "text",
+                "text": "Mara\nVidal",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "s3-body",
+                "frame": {
+                  "x": 90,
+                  "y": 240,
+                  "w": 700,
+                  "h": 300
+                },
+                "type": "text",
+                "text": "Directora de arte y fotógrafa. Doce años dando forma a marcas de moda, hotelería y belleza.\n\nCreo en la luz que ya está ahí, en el blanco que descansa y en decir una cosa a la vez.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s3-b1",
+            "trigger": "auto",
+            "delay": 0.25,
+            "actions": [
+              {
+                "nodeId": "s3-kicker",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s3-h",
+                "effect": "slideIn",
+                "duration": 0.65,
+                "delay": 0.1,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 44
+              }
+            ]
+          },
+          {
+            "id": "s3-b2",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s3-body",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sec-01",
+      "name": "Sección 01 · Trayectoria",
+      "slide": {
+        "id": "sec-01",
+        "name": "Sección 01 · Trayectoria",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.7
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s4-img",
+                "frame": {
+                  "x": 1120,
+                  "y": 240,
+                  "w": 800,
+                  "h": 700
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/629dca3f2028449c590cc5a39031442b81798770fec13d91837aa167335e0282.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s4-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 160,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Sección 01",
+                "styleRef": "$textStyles.caption"
+              },
+              {
+                "id": "chapter-num",
+                "frame": {
+                  "x": 60,
+                  "y": 220,
+                  "w": 900,
+                  "h": 640
+                },
+                "type": "text",
+                "text": "01",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 560,
+                  "lineHeight": 1,
+                  "letterSpacing": -26,
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s4-h",
+                "frame": {
+                  "x": 88,
+                  "y": 810,
+                  "w": 900,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "Trayectoria",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s4-b1",
+            "trigger": "auto",
+            "delay": 0.1,
+            "actions": [
+              {
+                "nodeId": "chapter-num",
+                "effect": "scaleIn",
+                "duration": 0.8,
+                "delay": 0,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "s4-b2",
+            "trigger": "auto",
+            "delay": 0.4,
+            "actions": [
+              {
+                "nodeId": "s4-img",
+                "effect": "slideIn",
+                "duration": 0.75,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 80
+              },
+              {
+                "nodeId": "s4-kicker",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.1,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s4-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.18,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "edu",
+      "name": "Formación",
+      "slide": {
+        "id": "edu",
+        "name": "Formación",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.9
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s5-img",
+                "frame": {
+                  "x": 90,
+                  "y": 160,
+                  "w": 520,
+                  "h": 780
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/91cc4c7b3814a0022c339f21f3d36f7d8bbf854fdabce487fb9f105122a3da00.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s5-h",
+                "frame": {
+                  "x": 688,
+                  "y": 160,
+                  "w": 900,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "Formación",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "chapter-num",
+                "frame": {
+                  "x": 1700,
+                  "y": 160,
+                  "w": 130,
+                  "h": 120
+                },
+                "type": "text",
+                "text": "01",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 96,
+                  "lineHeight": 1,
+                  "letterSpacing": -4,
+                  "color": "$colors.accent",
+                  "align": "right"
+                }
+              },
+              {
+                "id": "s5-y0",
+                "frame": {
+                  "x": 690,
+                  "y": 390,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2014 — 2017",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s5-t0",
+                "frame": {
+                  "x": 690,
+                  "y": 424,
+                  "w": 760,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Universidad de Hannover",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s5-d0",
+                "frame": {
+                  "x": 690,
+                  "y": 476,
+                  "w": 760,
+                  "h": 60
+                },
+                "type": "text",
+                "text": "Licenciatura en Diseño Visual. Mención en tipografía editorial.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 22
+                }
+              },
+              {
+                "id": "s5-hr0",
+                "frame": {
+                  "x": 690,
+                  "y": 554,
+                  "w": 760,
+                  "h": 1
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "s5-y1",
+                "frame": {
+                  "x": 690,
+                  "y": 575,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2017 — 2019",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s5-t1",
+                "frame": {
+                  "x": 690,
+                  "y": 609,
+                  "w": 760,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Escuela Wardiere",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s5-d1",
+                "frame": {
+                  "x": 690,
+                  "y": 661,
+                  "w": 760,
+                  "h": 60
+                },
+                "type": "text",
+                "text": "Máster en dirección de arte y fotografía de moda.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 22
+                }
+              },
+              {
+                "id": "s5-hr1",
+                "frame": {
+                  "x": 690,
+                  "y": 739,
+                  "w": 760,
+                  "h": 1
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.tone-1"
+                }
+              },
+              {
+                "id": "s5-y2",
+                "frame": {
+                  "x": 690,
+                  "y": 760,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2020",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s5-t2",
+                "frame": {
+                  "x": 690,
+                  "y": 794,
+                  "w": 760,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Residencia Spies",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s5-d2",
+                "frame": {
+                  "x": 690,
+                  "y": 846,
+                  "w": 760,
+                  "h": 60
+                },
+                "type": "text",
+                "text": "Investigación en color, sombra y luz natural del Pacífico.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 22
+                }
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s5-b1",
+            "trigger": "auto",
+            "delay": 0.3,
+            "actions": [
+              {
+                "nodeId": "s5-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              },
+              {
+                "nodeId": "s5-img",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0.08,
+                "easing": "easeOut",
+                "direction": "right",
+                "distance": 60
+              }
+            ]
+          },
+          {
+            "id": "s5-b2",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s5-y0",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s5-t0",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 22
+              },
+              {
+                "nodeId": "s5-d0",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s5-hr0",
+                "effect": "scaleIn",
+                "duration": 0.4,
+                "delay": 0.2,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "s5-b3",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s5-y1",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s5-t1",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 22
+              },
+              {
+                "nodeId": "s5-d1",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s5-hr1",
+                "effect": "scaleIn",
+                "duration": 0.4,
+                "delay": 0.2,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "s5-b4",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s5-y2",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s5-t2",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.05,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 22
+              },
+              {
+                "nodeId": "s5-d2",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "skills",
+      "name": "Aptitudes",
+      "slide": {
+        "id": "skills",
+        "name": "Aptitudes",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s6-img",
+                "frame": {
+                  "x": 0,
+                  "y": 140,
+                  "w": 560,
+                  "h": 800
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/bd73939b51a178b16b98650ab6f3e87b946135ff99192e661d340e7693f81226.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s6-h",
+                "frame": {
+                  "x": 738,
+                  "y": 160,
+                  "w": 800,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "Aptitudes",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "rule-bar",
+                "frame": {
+                  "x": 740,
+                  "y": 330,
+                  "w": 120,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s6-bars",
+                "name": "Barras vivas",
+                "frame": {
+                  "x": 1120,
+                  "y": 360,
+                  "w": 710,
+                  "h": 520
+                },
+                "type": "code-block",
+                "code": "\nconst C = ((slidecode.theme||{}).colors)||{};\nconst ACC = C.accent || '#D9A15B';\nconst INK = C.ink || '#E9E5DC';\nconst MUT = C.muted || '#8E887C';\nconst HAIR = C.hairline || '#231F1B';\n\nconst DATA = [\n  { v: 95, hero: true  },\n  { v: 88, hero: false },\n  { v: 92, hero: false },\n  { v: 74, hero: false },\n  { v: 81, hero: false }\n];\n\nconst c = document.createElement('canvas');\ndocument.body.appendChild(c);\nconst ctx = c.getContext('2d');\nlet dpr = Math.min(devicePixelRatio||1, 2), W = 0, Hh = 0;\nfunction size(){\n  W = innerWidth; Hh = innerHeight;\n  c.width = W*dpr; c.height = Hh*dpr;\n  c.style.width = W+'px'; c.style.height = Hh+'px';\n  ctx.setTransform(dpr,0,0,dpr,0,0);\n}\nsize(); addEventListener('resize', size);\n\nconst expo = t => t>=1 ? 1 : 1 - Math.pow(2,-10*t);\nconst ROWS = DATA.length, GAP = 100, TRACK = 8, NUMW = 96;\nlet t0 = null, started = (slidecode.mode === 'edit');\n\nfunction draw(now){\n  const t = now/1000;\n  ctx.clearRect(0,0,W,Hh);\n  const barW = W - NUMW - 18;\n\n  for (let i=0;i<ROWS;i++){\n    const y = 20 + i*GAP;\n    const d = DATA[i];\n    let k = 1;\n    if (!started) k = 0;\n    else if (t0 !== null){\n      k = expo(Math.max(0, Math.min((now - t0 - i*110) / 1100, 1)));\n    }\n    const val = d.v * k;\n\n    // track\n    ctx.fillStyle = HAIR;\n    ctx.fillRect(0, y, barW, TRACK);\n\n    // bar\n    const bw = barW * (val/100);\n    ctx.fillStyle = d.hero ? ACC : MUT;\n    ctx.globalAlpha = d.hero ? 1 : 0.62;\n    ctx.fillRect(0, y, bw, TRACK);\n    ctx.globalAlpha = 1;\n\n    // idle sweep on the hero bar\n    if (d.hero && k > 0.99){\n      const cyc = (t % 5) / 5;\n      if (cyc < 0.55){\n        const p = cyc/0.55, hx = bw*p, g = ctx.createLinearGradient(hx-70, 0, hx+70, 0);\n        g.addColorStop(0,  ACC + '00');\n        g.addColorStop(0.5, INK);\n        g.addColorStop(1,  ACC + '00');\n        ctx.globalAlpha = 0.55*Math.sin(Math.PI*p);\n        ctx.fillStyle = g;\n        ctx.fillRect(Math.max(0,hx-70), y, Math.min(140, bw-(hx-70)), TRACK);\n        ctx.globalAlpha = 1;\n      }\n    }\n\n    // tick at the end of the bar\n    ctx.fillStyle = d.hero ? ACC : MUT;\n    ctx.fillRect(bw-1, y-9, 2, TRACK+18);\n\n    // value\n    ctx.fillStyle = d.hero ? ACC : INK;\n    ctx.font = '800 34px system-ui, -apple-system, sans-serif';\n    ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';\n    ctx.globalAlpha = d.hero ? 1 : 0.8;\n    ctx.fillText(Math.round(val).toString(), W, y + TRACK + 8);\n    ctx.globalAlpha = 1;\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\nslidecode.onReveal(()=>{ started = true; t0 = performance.now(); });\nslidecode.onModeChange(m=>{ if (m==='edit'){ started = true; t0 = null; } });\n"
+              },
+              {
+                "id": "s6-l0",
+                "frame": {
+                  "x": 740,
+                  "y": 366,
+                  "w": 350,
+                  "h": 36
+                },
+                "type": "text",
+                "text": "Dirección de arte",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 24,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "s6-l1",
+                "frame": {
+                  "x": 740,
+                  "y": 466,
+                  "w": 350,
+                  "h": 36
+                },
+                "type": "text",
+                "text": "Fotografía",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 24,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "s6-l2",
+                "frame": {
+                  "x": 740,
+                  "y": 566,
+                  "w": 350,
+                  "h": 36
+                },
+                "type": "text",
+                "text": "Identidad visual",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 24,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "s6-l3",
+                "frame": {
+                  "x": 740,
+                  "y": 666,
+                  "w": 350,
+                  "h": 36
+                },
+                "type": "text",
+                "text": "Motion",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 24,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "s6-l4",
+                "frame": {
+                  "x": 740,
+                  "y": 766,
+                  "w": 350,
+                  "h": 36
+                },
+                "type": "text",
+                "text": "Edición",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 24,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s6-b1",
+            "trigger": "auto",
+            "delay": 0.15,
+            "actions": [
+              {
+                "nodeId": "s6-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              },
+              {
+                "nodeId": "rule-bar",
+                "effect": "scaleIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s6-img",
+                "effect": "slideIn",
+                "duration": 0.75,
+                "delay": 0.06,
+                "easing": "easeOut",
+                "direction": "right",
+                "distance": 70
+              }
+            ]
+          },
+          {
+            "id": "s6-b2",
+            "trigger": "auto",
+            "delay": 0.6,
+            "actions": [
+              {
+                "nodeId": "s6-l0",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s6-l1",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.06,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s6-l2",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.12,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s6-l3",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.18,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s6-l4",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.24,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "work",
+      "name": "Experiencia",
+      "slide": {
+        "id": "work",
+        "name": "Experiencia",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.85
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s7-h",
+                "frame": {
+                  "x": 88,
+                  "y": 160,
+                  "w": 1000,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "Experiencia",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "rule-bar",
+                "frame": {
+                  "x": 90,
+                  "y": 330,
+                  "w": 520,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s7-img",
+                "frame": {
+                  "x": 1300,
+                  "y": 160,
+                  "w": 530,
+                  "h": 780
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/061f5a13a981e45f15f8a94613b58778e01845b7d0afc7085170dd9943fe5495.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s7-y0",
+                "frame": {
+                  "x": 90,
+                  "y": 400,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2023 — hoy",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s7-t0",
+                "frame": {
+                  "x": 90,
+                  "y": 434,
+                  "w": 500,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Arowwai Industries",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s7-d0",
+                "frame": {
+                  "x": 90,
+                  "y": 486,
+                  "w": 470,
+                  "h": 90
+                },
+                "type": "text",
+                "text": "Dirección de arte de campaña y catálogo estacional.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 21
+                }
+              },
+              {
+                "id": "s7-y1",
+                "frame": {
+                  "x": 660,
+                  "y": 400,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2021 — 2023",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s7-t1",
+                "frame": {
+                  "x": 660,
+                  "y": 434,
+                  "w": 500,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Ingoude Studio",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s7-d1",
+                "frame": {
+                  "x": 660,
+                  "y": 486,
+                  "w": 470,
+                  "h": 90
+                },
+                "type": "text",
+                "text": "Identidad y arte para siete lanzamientos de producto.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 21
+                }
+              },
+              {
+                "id": "s7-y2",
+                "frame": {
+                  "x": 90,
+                  "y": 670,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2019 — 2021",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s7-t2",
+                "frame": {
+                  "x": 90,
+                  "y": 704,
+                  "w": 500,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Larana Hotels",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s7-d2",
+                "frame": {
+                  "x": 90,
+                  "y": 756,
+                  "w": 470,
+                  "h": 90
+                },
+                "type": "text",
+                "text": "Fotografía y guía visual de marca.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 21
+                }
+              },
+              {
+                "id": "s7-y3",
+                "frame": {
+                  "x": 660,
+                  "y": 670,
+                  "w": 300,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2018 — 2019",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s7-t3",
+                "frame": {
+                  "x": 660,
+                  "y": 704,
+                  "w": 500,
+                  "h": 44
+                },
+                "type": "text",
+                "text": "Borcelle Beauty",
+                "styleRef": "$textStyles.h2"
+              },
+              {
+                "id": "s7-d3",
+                "frame": {
+                  "x": 660,
+                  "y": 756,
+                  "w": 470,
+                  "h": 90
+                },
+                "type": "text",
+                "text": "Editoriales y contenido de temporada.",
+                "styleRef": "$textStyles.body",
+                "style": {
+                  "fontSize": 21
+                }
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s7-b1",
+            "trigger": "auto",
+            "delay": 0.25,
+            "actions": [
+              {
+                "nodeId": "s7-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              },
+              {
+                "nodeId": "s7-img",
+                "effect": "slideIn",
+                "duration": 0.75,
+                "delay": 0.1,
+                "easing": "easeOut",
+                "direction": "left",
+                "distance": 70
+              }
+            ]
+          },
+          {
+            "id": "s7-b2",
+            "trigger": "auto",
+            "delay": 0.7,
+            "actions": [
+              {
+                "nodeId": "s7-y0",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-t0",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "s7-d0",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.06,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-y1",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.07,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-t1",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.07,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "s7-d1",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.13,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-y2",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.14,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-t2",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.14,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "s7-d2",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.2,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-y3",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.21000000000000002,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s7-t3",
+                "effect": "slideIn",
+                "duration": 0.5,
+                "delay": 0.21000000000000002,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 20
+              },
+              {
+                "nodeId": "s7-d3",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.27,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "numbers",
+      "name": "En números",
+      "slide": {
+        "id": "numbers",
+        "name": "En números",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s8-h",
+                "frame": {
+                  "x": 88,
+                  "y": 160,
+                  "w": 900,
+                  "h": 150
+                },
+                "type": "text",
+                "text": "En números",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "s8-take",
+                "frame": {
+                  "x": 1150,
+                  "y": 170,
+                  "w": 680,
+                  "h": 180
+                },
+                "type": "text",
+                "text": "Nueve años de trabajo continuo, medidos en piezas publicadas y no en horas facturadas.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "s8-viz",
+                "name": "Métricas vivas",
+                "frame": {
+                  "x": 90,
+                  "y": 400,
+                  "w": 1740,
+                  "h": 540
+                },
+                "type": "code-block",
+                "code": "\nconst C = ((slidecode.theme||{}).colors)||{};\nconst ACC  = C.accent   || '#D9A15B';\nconst INK   = C.ink     || '#E9E5DC';\nconst MUT   = C.muted   || '#8E887C';\nconst HAIR  = C.hairline|| '#231F1B';\n\nconst M = [\n  { n:148, suf:'',  cap:'proyectos entregados', frac:0.86, hero:false },\n  { n:32,  suf:'',  cap:'marcas acompañadas',   frac:0.64, hero:false },\n  { n:12,  suf:'',  cap:'países',               frac:0.42, hero:true  }\n];\nconst TOTAL = M.length;\n\nconst c = document.createElement('canvas');\ndocument.body.appendChild(c);\nconst ctx = c.getContext('2d');\nlet dpr = Math.min(devicePixelRatio||1,2), W=0, Hh=0;\nfunction size(){ W=innerWidth; Hh=innerHeight; c.width=W*dpr; c.height=Hh*dpr;\n  c.style.width=W+'px'; c.style.height=Hh+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }\nsize(); addEventListener('resize', size);\n\nconst expo = t => t>=1 ? 1 : 1 - Math.pow(2,-10*t);\nconst stamps = new Array(TOTAL).fill(null);\nlet revealed = false;\n\nfunction shown(){\n  return (slidecode.mode === 'edit') ? TOTAL : slidecode.step;\n}\nfunction sync(now){\n  const s = shown();\n  for (let i=0;i<TOTAL;i++){\n    if (i < s && stamps[i] === null) stamps[i] = (slidecode.mode==='edit' && !revealed) ? now-1600 : now;\n    if (i >= s) stamps[i] = null;\n  }\n}\n\nfunction draw(now){\n  sync(now);\n  const t = now/1000;\n  ctx.clearRect(0,0,W,Hh);\n  const colW = W/TOTAL;\n  const R = Math.min(colW*0.28, Hh*0.34);\n\n  for (let i=0;i<TOTAL;i++){\n    const m = M[i];\n    const cx = colW*(i+0.5), cy = Hh*0.44;\n    const k = stamps[i] === null ? 0 : expo(Math.min((now-stamps[i])/1500, 1));\n\n    // hairline column rule\n    if (i > 0){\n      ctx.strokeStyle = HAIR; ctx.lineWidth = 1;\n      ctx.beginPath(); ctx.moveTo(colW*i, Hh*0.06); ctx.lineTo(colW*i, Hh*0.94); ctx.stroke();\n    }\n\n    // empty ring\n    ctx.strokeStyle = HAIR; ctx.lineWidth = 10;\n    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();\n\n    // filled arc\n    const sweep = Math.PI*2*m.frac*k;\n    ctx.strokeStyle = m.hero ? ACC : MUT;\n    ctx.globalAlpha = m.hero ? 1 : 0.7;\n    ctx.lineWidth = m.hero ? 12 : 10;\n    ctx.lineCap = 'round';\n    ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI/2, -Math.PI/2 + sweep); ctx.stroke();\n    ctx.globalAlpha = 1; ctx.lineCap = 'butt';\n\n    // idle: orbiting spark on completed rings + hero pulse\n    if (k > 0.99){\n      const ang = -Math.PI/2 + sweep;\n      const orb = ang - (t*0.55 % (Math.PI*2*m.frac));\n      const ox = cx + Math.cos(orb)*R, oy = cy + Math.sin(orb)*R;\n      ctx.fillStyle = m.hero ? ACC : INK;\n      ctx.globalAlpha = m.hero ? 0.95 : 0.5;\n      ctx.beginPath(); ctx.arc(ox, oy, m.hero ? 5.5 : 4, 0, Math.PI*2); ctx.fill();\n      ctx.globalAlpha = 1;\n      if (m.hero){\n        const pulse = (Math.sin(t*1.5)+1)/2;\n        ctx.strokeStyle = ACC; ctx.globalAlpha = 0.10 + 0.14*pulse; ctx.lineWidth = 2;\n        ctx.beginPath(); ctx.arc(cx, cy, R + 14 + 8*pulse, 0, Math.PI*2); ctx.stroke();\n        ctx.globalAlpha = 1;\n      }\n    }\n\n    // number\n    const val = Math.round(m.n * k);\n    ctx.textAlign='center'; ctx.textBaseline='middle';\n    ctx.fillStyle = m.hero ? ACC : INK;\n    ctx.font = '800 ' + Math.round(R*0.78) + 'px system-ui, -apple-system, sans-serif';\n    ctx.globalAlpha = k > 0 ? 1 : 0.12;\n    ctx.fillText(k > 0 ? (val + m.suf) : '—', cx, cy + 2);\n    ctx.globalAlpha = 1;\n\n    // caption\n    ctx.fillStyle = MUT;\n    ctx.font = '500 17px system-ui, -apple-system, sans-serif';\n    ctx.globalAlpha = 0.35 + 0.65*Math.min(k*2,1);\n    ctx.fillText(m.cap.toUpperCase(), cx, cy + R + 46);\n    ctx.globalAlpha = 1;\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\nslidecode.onReveal(()=>{ revealed = true; });\nslidecode.onStep(()=>{});\nslidecode.onModeChange(()=>{ for (let i=0;i<TOTAL;i++) stamps[i]=null; });\n",
+                "stepCount": 3
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s8-b1",
+            "trigger": "auto",
+            "delay": 0.15,
+            "actions": [
+              {
+                "nodeId": "s8-h",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              },
+              {
+                "nodeId": "s8-take",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0.12,
+                "easing": "easeOut"
+              }
+            ]
+          },
+          {
+            "id": "s8-b2",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s8-viz",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "s8-b3",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s8-viz",
+                "effect": "codeStep"
+              }
+            ]
+          },
+          {
+            "id": "s8-b4",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s8-viz",
+                "effect": "codeStep"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "projects",
+      "name": "Proyectos",
+      "slide": {
+        "id": "projects",
+        "name": "Proyectos",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "slide",
+          "duration": 0.7,
+          "direction": "left"
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s9-h",
+                "frame": {
+                  "x": 84,
+                  "y": 150,
+                  "w": 1500,
+                  "h": 250
+                },
+                "type": "text",
+                "text": "Proyectos",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 200,
+                  "letterSpacing": -9
+                }
+              },
+              {
+                "id": "s9-c1",
+                "frame": {
+                  "x": 90,
+                  "y": 424,
+                  "w": 540,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "01 · Marea baja",
+                "styleRef": "$textStyles.code"
+              },
+              {
+                "id": "s9-c2",
+                "frame": {
+                  "x": 690,
+                  "y": 424,
+                  "w": 540,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "02 · Arena viva",
+                "styleRef": "$textStyles.code",
+                "style": {
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "s9-c3",
+                "frame": {
+                  "x": 1290,
+                  "y": 424,
+                  "w": 540,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "03 · Sol de enero",
+                "styleRef": "$textStyles.code",
+                "style": {
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "proj-hero-img",
+                "frame": {
+                  "x": 90,
+                  "y": 460,
+                  "w": 560,
+                  "h": 470
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/b402734fe5cb08d43d17095daecfc9fa64ebf2b8e387ac3aa19448dae2a5e8c4.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s9-t2",
+                "frame": {
+                  "x": 690,
+                  "y": 460,
+                  "w": 560,
+                  "h": 470
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/6635020210f4047c0a74c5177d3a1777f2ccf1fb64f82e6126d15aa4331735c2.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s9-t3",
+                "frame": {
+                  "x": 1290,
+                  "y": 460,
+                  "w": 540,
+                  "h": 470
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/8d93220ce5ee5f539192ec87c8624824765899ae5a8c4528188a1ac7f2a6af8d.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s9-b1",
+            "trigger": "auto",
+            "delay": 0.1,
+            "actions": [
+              {
+                "nodeId": "s9-h",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 50
+              }
+            ]
+          },
+          {
+            "id": "s9-b2",
+            "trigger": "auto",
+            "delay": 0.45,
+            "actions": [
+              {
+                "nodeId": "proj-hero-img",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 50
+              },
+              {
+                "nodeId": "s9-c1",
+                "effect": "fadeIn",
+                "duration": 0.35,
+                "delay": 0.05,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s9-t2",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.09,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 50
+              },
+              {
+                "nodeId": "s9-c2",
+                "effect": "fadeIn",
+                "duration": 0.35,
+                "delay": 0.14,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s9-t3",
+                "effect": "slideIn",
+                "duration": 0.6,
+                "delay": 0.18,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 50
+              },
+              {
+                "nodeId": "s9-c3",
+                "effect": "fadeIn",
+                "duration": 0.35,
+                "delay": 0.23,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "proj-01",
+      "name": "Proyecto 01",
+      "slide": {
+        "id": "proj-01",
+        "name": "Proyecto 01",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "morph",
+          "duration": 0.9
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "proj-hero-img",
+                "frame": {
+                  "x": 90,
+                  "y": 90,
+                  "w": 900,
+                  "h": 860
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/b402734fe5cb08d43d17095daecfc9fa64ebf2b8e387ac3aa19448dae2a5e8c4.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s10-kicker",
+                "frame": {
+                  "x": 1058,
+                  "y": 300,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Proyecto 01",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s10-h",
+                "frame": {
+                  "x": 1056,
+                  "y": 340,
+                  "w": 780,
+                  "h": 290
+                },
+                "type": "text",
+                "text": "Marea\nbaja",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "s10-body",
+                "frame": {
+                  "x": 1058,
+                  "y": 660,
+                  "w": 700,
+                  "h": 200
+                },
+                "type": "text",
+                "text": "Campaña de verano para una marca de baño: doce piezas fotografiadas en dos días de luz plana en la costa de Cachagua. Sin flash, sin retoque de piel.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "s10-meta",
+                "frame": {
+                  "x": 1058,
+                  "y": 880,
+                  "w": 700,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2025 · dirección de arte + fotografía",
+                "styleRef": "$textStyles.code",
+                "style": {
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s10-b1",
+            "trigger": "auto",
+            "delay": 0.3,
+            "actions": [
+              {
+                "nodeId": "s10-kicker",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s10-h",
+                "effect": "slideIn",
+                "duration": 0.65,
+                "delay": 0.08,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              }
+            ]
+          },
+          {
+            "id": "s10-b2",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s10-body",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s10-meta",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.1,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "proj-02",
+      "name": "Proyecto 02",
+      "slide": {
+        "id": "proj-02",
+        "name": "Proyecto 02",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.6
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s11-a",
+                "frame": {
+                  "x": 880,
+                  "y": 90,
+                  "w": 520,
+                  "h": 620
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/6635020210f4047c0a74c5177d3a1777f2ccf1fb64f82e6126d15aa4331735c2.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s11-b",
+                "frame": {
+                  "x": 1440,
+                  "y": 330,
+                  "w": 390,
+                  "h": 660
+                },
+                "type": "image",
+                "src": "https://mcp.slidecode.app/catalogo/asset/8d93220ce5ee5f539192ec87c8624824765899ae5a8c4528188a1ac7f2a6af8d.jpg",
+                "fit": "cover"
+              },
+              {
+                "id": "s11-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 200,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Proyecto 02",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s11-h",
+                "frame": {
+                  "x": 88,
+                  "y": 240,
+                  "w": 780,
+                  "h": 290
+                },
+                "type": "text",
+                "text": "Arena\nviva",
+                "styleRef": "$textStyles.h1"
+              },
+              {
+                "id": "s11-body",
+                "frame": {
+                  "x": 90,
+                  "y": 560,
+                  "w": 640,
+                  "h": 200
+                },
+                "type": "text",
+                "text": "Identidad y sistema editorial para un hotel de dunas. Una tipografía, dos tintas y un solo gesto repetido: el horizonte.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "s11-meta",
+                "frame": {
+                  "x": 90,
+                  "y": 760,
+                  "w": 640,
+                  "h": 24
+                },
+                "type": "text",
+                "text": "2024 · identidad + editorial",
+                "styleRef": "$textStyles.code",
+                "style": {
+                  "color": "$colors.ink"
+                }
+              },
+              {
+                "id": "chrome-kicker",
+                "frame": {
+                  "x": 90,
+                  "y": 62,
+                  "w": 600,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Presentación creativa",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-date",
+                "frame": {
+                  "x": 1330,
+                  "y": 62,
+                  "w": 500,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "09 mayo 2026",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s11-b1",
+            "trigger": "auto",
+            "delay": 0.2,
+            "actions": [
+              {
+                "nodeId": "s11-kicker",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s11-h",
+                "effect": "slideIn",
+                "duration": 0.65,
+                "delay": 0.08,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 40
+              }
+            ]
+          },
+          {
+            "id": "s11-b2",
+            "trigger": "auto",
+            "delay": 0.5,
+            "actions": [
+              {
+                "nodeId": "s11-a",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              },
+              {
+                "nodeId": "s11-b",
+                "effect": "slideIn",
+                "duration": 0.7,
+                "delay": 0.12,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              }
+            ]
+          },
+          {
+            "id": "s11-b3",
+            "trigger": "click",
+            "actions": [
+              {
+                "nodeId": "s11-body",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s11-meta",
+                "effect": "fadeIn",
+                "duration": 0.4,
+                "delay": 0.1,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "thanks",
+      "name": "Gracias",
+      "slide": {
+        "id": "thanks",
+        "name": "Gracias",
+        "background": {
+          "type": "solid",
+          "color": "$colors.canvas"
+        },
+        "transition": {
+          "type": "fade",
+          "duration": 0.8
+        },
+        "layers": [
+          {
+            "id": "main",
+            "nodes": [
+              {
+                "id": "s12-title",
+                "frame": {
+                  "x": 64,
+                  "y": 300,
+                  "w": 1560,
+                  "h": 340
+                },
+                "type": "text",
+                "text": "Gracias.",
+                "styleRef": "$textStyles.display",
+                "style": {
+                  "fontSize": 300,
+                  "letterSpacing": -13
+                }
+              },
+              {
+                "id": "s12-rule",
+                "frame": {
+                  "x": 90,
+                  "y": 690,
+                  "w": 140,
+                  "h": 4
+                },
+                "type": "shape",
+                "shape": "rect",
+                "fill": {
+                  "type": "solid",
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "s12-lede",
+                "frame": {
+                  "x": 90,
+                  "y": 730,
+                  "w": 860,
+                  "h": 110
+                },
+                "type": "text",
+                "text": "Si algo de esto se parece a lo que estás buscando, escribamos.",
+                "styleRef": "$textStyles.body"
+              },
+              {
+                "id": "s12-cta",
+                "frame": {
+                  "x": 90,
+                  "y": 850,
+                  "w": 900,
+                  "h": 60
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.h2",
+                "style": {
+                  "fontSize": 48,
+                  "color": "$colors.accent"
+                }
+              },
+              {
+                "id": "chrome-mark",
+                "frame": {
+                  "x": 90,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "Estudio Verano",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "fontWeight": 800,
+                  "letterSpacing": 3.4,
+                  "color": "$colors.muted"
+                }
+              },
+              {
+                "id": "chrome-site",
+                "frame": {
+                  "x": 760,
+                  "y": 984,
+                  "w": 400,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "center"
+                }
+              },
+              {
+                "id": "chrome-mail",
+                "frame": {
+                  "x": 1410,
+                  "y": 984,
+                  "w": 420,
+                  "h": 26
+                },
+                "type": "text",
+                "text": "hola@estudioverano.com",
+                "styleRef": "$textStyles.caption",
+                "style": {
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ],
+        "builds": [
+          {
+            "id": "s12-b1",
+            "trigger": "auto",
+            "delay": 0.15,
+            "actions": [
+              {
+                "nodeId": "s12-title",
+                "effect": "slideIn",
+                "duration": 0.8,
+                "delay": 0,
+                "easing": "easeOut",
+                "direction": "up",
+                "distance": 60
+              }
+            ]
+          },
+          {
+            "id": "s12-b2",
+            "trigger": "auto",
+            "delay": 0.7,
+            "actions": [
+              {
+                "nodeId": "s12-rule",
+                "effect": "scaleIn",
+                "duration": 0.4,
+                "delay": 0,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s12-lede",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0.1,
+                "easing": "easeOut"
+              },
+              {
+                "nodeId": "s12-cta",
+                "effect": "fadeIn",
+                "duration": 0.5,
+                "delay": 0.2,
+                "easing": "easeOut"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "modules": [
+    {
+      "id": "s6-bars",
+      "name": "Barras vivas",
+      "node": {
+        "id": "s6-bars",
+        "name": "Barras vivas",
+        "frame": {
+          "x": 1120,
+          "y": 360,
+          "w": 710,
+          "h": 520
+        },
+        "type": "code-block",
+        "code": "\nconst C = ((slidecode.theme||{}).colors)||{};\nconst ACC = C.accent || '#D9A15B';\nconst INK = C.ink || '#E9E5DC';\nconst MUT = C.muted || '#8E887C';\nconst HAIR = C.hairline || '#231F1B';\n\nconst DATA = [\n  { v: 95, hero: true  },\n  { v: 88, hero: false },\n  { v: 92, hero: false },\n  { v: 74, hero: false },\n  { v: 81, hero: false }\n];\n\nconst c = document.createElement('canvas');\ndocument.body.appendChild(c);\nconst ctx = c.getContext('2d');\nlet dpr = Math.min(devicePixelRatio||1, 2), W = 0, Hh = 0;\nfunction size(){\n  W = innerWidth; Hh = innerHeight;\n  c.width = W*dpr; c.height = Hh*dpr;\n  c.style.width = W+'px'; c.style.height = Hh+'px';\n  ctx.setTransform(dpr,0,0,dpr,0,0);\n}\nsize(); addEventListener('resize', size);\n\nconst expo = t => t>=1 ? 1 : 1 - Math.pow(2,-10*t);\nconst ROWS = DATA.length, GAP = 100, TRACK = 8, NUMW = 96;\nlet t0 = null, started = (slidecode.mode === 'edit');\n\nfunction draw(now){\n  const t = now/1000;\n  ctx.clearRect(0,0,W,Hh);\n  const barW = W - NUMW - 18;\n\n  for (let i=0;i<ROWS;i++){\n    const y = 20 + i*GAP;\n    const d = DATA[i];\n    let k = 1;\n    if (!started) k = 0;\n    else if (t0 !== null){\n      k = expo(Math.max(0, Math.min((now - t0 - i*110) / 1100, 1)));\n    }\n    const val = d.v * k;\n\n    // track\n    ctx.fillStyle = HAIR;\n    ctx.fillRect(0, y, barW, TRACK);\n\n    // bar\n    const bw = barW * (val/100);\n    ctx.fillStyle = d.hero ? ACC : MUT;\n    ctx.globalAlpha = d.hero ? 1 : 0.62;\n    ctx.fillRect(0, y, bw, TRACK);\n    ctx.globalAlpha = 1;\n\n    // idle sweep on the hero bar\n    if (d.hero && k > 0.99){\n      const cyc = (t % 5) / 5;\n      if (cyc < 0.55){\n        const p = cyc/0.55, hx = bw*p, g = ctx.createLinearGradient(hx-70, 0, hx+70, 0);\n        g.addColorStop(0,  ACC + '00');\n        g.addColorStop(0.5, INK);\n        g.addColorStop(1,  ACC + '00');\n        ctx.globalAlpha = 0.55*Math.sin(Math.PI*p);\n        ctx.fillStyle = g;\n        ctx.fillRect(Math.max(0,hx-70), y, Math.min(140, bw-(hx-70)), TRACK);\n        ctx.globalAlpha = 1;\n      }\n    }\n\n    // tick at the end of the bar\n    ctx.fillStyle = d.hero ? ACC : MUT;\n    ctx.fillRect(bw-1, y-9, 2, TRACK+18);\n\n    // value\n    ctx.fillStyle = d.hero ? ACC : INK;\n    ctx.font = '800 34px system-ui, -apple-system, sans-serif';\n    ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';\n    ctx.globalAlpha = d.hero ? 1 : 0.8;\n    ctx.fillText(Math.round(val).toString(), W, y + TRACK + 8);\n    ctx.globalAlpha = 1;\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\nslidecode.onReveal(()=>{ started = true; t0 = performance.now(); });\nslidecode.onModeChange(m=>{ if (m==='edit'){ started = true; t0 = null; } });\n"
+      }
+    },
+    {
+      "id": "s8-viz",
+      "name": "Métricas vivas",
+      "node": {
+        "id": "s8-viz",
+        "name": "Métricas vivas",
+        "frame": {
+          "x": 90,
+          "y": 400,
+          "w": 1740,
+          "h": 540
+        },
+        "type": "code-block",
+        "code": "\nconst C = ((slidecode.theme||{}).colors)||{};\nconst ACC  = C.accent   || '#D9A15B';\nconst INK   = C.ink     || '#E9E5DC';\nconst MUT   = C.muted   || '#8E887C';\nconst HAIR  = C.hairline|| '#231F1B';\n\nconst M = [\n  { n:148, suf:'',  cap:'proyectos entregados', frac:0.86, hero:false },\n  { n:32,  suf:'',  cap:'marcas acompañadas',   frac:0.64, hero:false },\n  { n:12,  suf:'',  cap:'países',               frac:0.42, hero:true  }\n];\nconst TOTAL = M.length;\n\nconst c = document.createElement('canvas');\ndocument.body.appendChild(c);\nconst ctx = c.getContext('2d');\nlet dpr = Math.min(devicePixelRatio||1,2), W=0, Hh=0;\nfunction size(){ W=innerWidth; Hh=innerHeight; c.width=W*dpr; c.height=Hh*dpr;\n  c.style.width=W+'px'; c.style.height=Hh+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }\nsize(); addEventListener('resize', size);\n\nconst expo = t => t>=1 ? 1 : 1 - Math.pow(2,-10*t);\nconst stamps = new Array(TOTAL).fill(null);\nlet revealed = false;\n\nfunction shown(){\n  return (slidecode.mode === 'edit') ? TOTAL : slidecode.step;\n}\nfunction sync(now){\n  const s = shown();\n  for (let i=0;i<TOTAL;i++){\n    if (i < s && stamps[i] === null) stamps[i] = (slidecode.mode==='edit' && !revealed) ? now-1600 : now;\n    if (i >= s) stamps[i] = null;\n  }\n}\n\nfunction draw(now){\n  sync(now);\n  const t = now/1000;\n  ctx.clearRect(0,0,W,Hh);\n  const colW = W/TOTAL;\n  const R = Math.min(colW*0.28, Hh*0.34);\n\n  for (let i=0;i<TOTAL;i++){\n    const m = M[i];\n    const cx = colW*(i+0.5), cy = Hh*0.44;\n    const k = stamps[i] === null ? 0 : expo(Math.min((now-stamps[i])/1500, 1));\n\n    // hairline column rule\n    if (i > 0){\n      ctx.strokeStyle = HAIR; ctx.lineWidth = 1;\n      ctx.beginPath(); ctx.moveTo(colW*i, Hh*0.06); ctx.lineTo(colW*i, Hh*0.94); ctx.stroke();\n    }\n\n    // empty ring\n    ctx.strokeStyle = HAIR; ctx.lineWidth = 10;\n    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();\n\n    // filled arc\n    const sweep = Math.PI*2*m.frac*k;\n    ctx.strokeStyle = m.hero ? ACC : MUT;\n    ctx.globalAlpha = m.hero ? 1 : 0.7;\n    ctx.lineWidth = m.hero ? 12 : 10;\n    ctx.lineCap = 'round';\n    ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI/2, -Math.PI/2 + sweep); ctx.stroke();\n    ctx.globalAlpha = 1; ctx.lineCap = 'butt';\n\n    // idle: orbiting spark on completed rings + hero pulse\n    if (k > 0.99){\n      const ang = -Math.PI/2 + sweep;\n      const orb = ang - (t*0.55 % (Math.PI*2*m.frac));\n      const ox = cx + Math.cos(orb)*R, oy = cy + Math.sin(orb)*R;\n      ctx.fillStyle = m.hero ? ACC : INK;\n      ctx.globalAlpha = m.hero ? 0.95 : 0.5;\n      ctx.beginPath(); ctx.arc(ox, oy, m.hero ? 5.5 : 4, 0, Math.PI*2); ctx.fill();\n      ctx.globalAlpha = 1;\n      if (m.hero){\n        const pulse = (Math.sin(t*1.5)+1)/2;\n        ctx.strokeStyle = ACC; ctx.globalAlpha = 0.10 + 0.14*pulse; ctx.lineWidth = 2;\n        ctx.beginPath(); ctx.arc(cx, cy, R + 14 + 8*pulse, 0, Math.PI*2); ctx.stroke();\n        ctx.globalAlpha = 1;\n      }\n    }\n\n    // number\n    const val = Math.round(m.n * k);\n    ctx.textAlign='center'; ctx.textBaseline='middle';\n    ctx.fillStyle = m.hero ? ACC : INK;\n    ctx.font = '800 ' + Math.round(R*0.78) + 'px system-ui, -apple-system, sans-serif';\n    ctx.globalAlpha = k > 0 ? 1 : 0.12;\n    ctx.fillText(k > 0 ? (val + m.suf) : '—', cx, cy + 2);\n    ctx.globalAlpha = 1;\n\n    // caption\n    ctx.fillStyle = MUT;\n    ctx.font = '500 17px system-ui, -apple-system, sans-serif';\n    ctx.globalAlpha = 0.35 + 0.65*Math.min(k*2,1);\n    ctx.fillText(m.cap.toUpperCase(), cx, cy + R + 46);\n    ctx.globalAlpha = 1;\n  }\n  requestAnimationFrame(draw);\n}\nrequestAnimationFrame(draw);\nslidecode.onReveal(()=>{ revealed = true; });\nslidecode.onStep(()=>{});\nslidecode.onModeChange(()=>{ for (let i=0;i<TOTAL;i++) stamps[i]=null; });\n",
+        "stepCount": 3
+      }
+    }
+  ],
+  "specimen": "cover",
+  "guide": {
+    "margin": 62
+  }
+}
