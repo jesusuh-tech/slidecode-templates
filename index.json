@@ -22,6 +22,13 @@
     "description": "Papel cálido, serifa editorial y mucho aire. Para propuestas que se leen despacio."
   },
   {
+    "id": "pitch-red",
+    "name": "PITCH RED",
+    "file": "templates/pitch-red.sctemplate",
+    "version": "1.0.0",
+    "author": "Jesus Hurtado"
+  },
+  {
     "id": "portafolio-creativo-vol-02",
     "name": "Portafolio Creativo — VOL. 02",
     "file": "templates/portafolio-creativo-vol-02.sctemplate",
